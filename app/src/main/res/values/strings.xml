@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">NutriScan</string>
+    <string name="calories">Calories</string>
+    <string name="total_fat">Total Fat</string>
+    <string name="cholesterol">Cholesterol</string>
+    <string name="sodium">Sodium</string>
+    <string name="total_carbohydrate">Total Carbohydrate</string>
+    <string name="protein">Protein</string>
+    <string name="nutrition_summary">Nutrition Summary</string>
+    <string name="scan_history">Scan History</string>
+</resources>

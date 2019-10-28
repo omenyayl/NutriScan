@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".profile.views.ProfileActivity">
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/textViewNutritionSummaryName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/h1"
+                android:padding="8dp"
+                android:text="@string/nutrition_summary" />
+
+            <TextView
+                android:id="@+id/textViewCaloriesName"
+                android:paddingLeft="16dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/h2"
+                android:text="@string/calories" />
+
+            <TextView
+                android:id="@+id/textViewCaloriesValue"
+                android:layout_width="match_parent"
+                android:paddingLeft="16dp"
+                android:textColor="@color/black"
+                android:layout_height="wrap_content"
+                android:text="2313 kcal" />
+
+            <TextView
+                android:id="@+id/textViewTotalFatName"
+                android:paddingLeft="16dp"
+                android:paddingTop="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/h2"
+                android:text="@string/total_fat" />
+
+            <TextView
+                android:id="@+id/textViewTotalFatValue"
+                android:layout_width="match_parent"
+                android:paddingLeft="16dp"
+                android:textColor="@color/black"
+                android:layout_height="wrap_content"
+                android:text="5.6 g" />
+
+            <TextView
+                android:id="@+id/textViewCholesterolName"
+                android:paddingLeft="16dp"
+                android:paddingTop="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/h2"
+                android:text="@string/cholesterol" />
+
+            <TextView
+                android:id="@+id/textViewCholesterolValue"
+                android:layout_width="match_parent"
+                android:paddingLeft="16dp"
+                android:textColor="@color/black"
+                android:layout_height="wrap_content"
+                android:text="7 mg" />
+
+
+            <TextView
+                android:id="@+id/textViewSodiumName"
+                android:paddingLeft="16dp"
+                android:paddingTop="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/h2"
+                android:text="@string/sodium" />
+
+            <TextView
+                android:id="@+id/textViewSodiumValue"
+                android:layout_width="match_parent"
+                android:paddingLeft="16dp"
+                android:textColor="@color/black"
+                android:layout_height="wrap_content"
+                android:text="340 mg" />
+
+            <TextView
+                android:id="@+id/textViewCarbohydrateName"
+                android:paddingLeft="16dp"
+                android:paddingTop="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/h2"
+                android:text="@string/total_carbohydrate" />
+
+            <TextView
+                android:id="@+id/textViewCarbohydrateValue"
+                android:layout_width="match_parent"
+                android:paddingLeft="16dp"
+                android:textColor="@color/black"
+                android:layout_height="wrap_content"
+                android:text="343 g" />
+
+            <TextView
+                android:id="@+id/textViewProteinName"
+                android:paddingLeft="16dp"
+                android:paddingTop="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/h2"
+                android:text="@string/protein" />
+
+            <TextView
+                android:id="@+id/textViewProteinValue"
+                android:layout_width="match_parent"
+                android:paddingLeft="16dp"
+                android:textColor="@color/black"
+                android:layout_height="wrap_content"
+                android:text="110 g" />
+
+            <TextView
+                android:id="@+id/textViewScanHistoryName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/h1"
+                android:padding="8dp"
+                android:text="@string/scan_history" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerViewScanHistory"
+                android:layout_width="match_parent"
+                android:layout_marginLeft="16dp"
+                android:layout_height="match_parent"
+                />
+
+
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+
+</android.support.constraint.ConstraintLayout>
