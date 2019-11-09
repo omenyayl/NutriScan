@@ -8,4 +8,10 @@
     <string name="protein">Protein</string>
     <string name="nutrition_summary">Nutrition Summary</string>
     <string name="scan_history">Scan History</string>
+    <string name="sample_upc">0123456789012</string>
+    <string name="sample_food_name">Sample</string>
+    <string name="sample_calories">2313 kcal</string>
+    <string name="sample_amount">5.6 g</string>
+    <string name="sample_amount2">7 mg</string>
+    <string name="sample_amount3">340 mg</string>
 </resources>

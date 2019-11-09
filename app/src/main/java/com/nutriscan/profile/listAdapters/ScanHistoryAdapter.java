@@ -6,19 +6,31 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.TextView;
 import com.nutriscan.R;
+import com.nutriscan.listeners.OnModelClick;
+import com.nutriscan.shared.domain.Product;
+import com.nutriscan.shared.domain.ScanLog.ScanLog;
+
 import java.util.List;
 
+/**
+ * Adapter for a {@link RecyclerView} that displays a products of Products
+ */
 public class ScanHistoryAdapter extends RecyclerView.Adapter<ScanHistoryAdapter.ViewHolder> {
-    private List<String> list;
-    private AdapterView.OnItemClickListener onItemClickListener;
+    private List<Product> products;
+    private OnModelClick<Product> onModelClickListener;
 
-    public ScanHistoryAdapter(List<String> list) {
-        this.list = list;
+    public ScanHistoryAdapter(ScanLog scanLog) {
+        this.products = scanLog.getItems();
     }
 
+    /**
+     * Creating the products item ViewHolder
+     * @param viewGroup parent
+     * @param i products item index
+     * @return The new products item ViewHolder
+     */
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
@@ -27,32 +39,60 @@ public class ScanHistoryAdapter extends RecyclerView.Adapter<ScanHistoryAdapter.
         return new ViewHolder(todoView);
     }
 
-    void setOnItemClickListener(AdapterView.OnItemClickListener onClickListener) {
-        this.onItemClickListener = onClickListener;
+    /**
+     * Implement the OnModelClick argument, and its onClick method will be called when the user
+     * clicks the products item
+     * @param onModelClickListener The listener whose onClick function will be called onClick of
+     * an item
+     */
+    public void setOnModelClickListener(OnModelClick<Product> onModelClickListener) {
+        this.onModelClickListener = onModelClickListener;
     }
 
+    /**
+     * Called when binding Views to the products item
+     * @param viewHolder The ViewHolder that we are binding to
+     * @param i The products item index
+     */
     @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder viewHolder, int i) {
-        viewHolder.textViewScanItem.setText(list.get(i));
-        if (this.onItemClickListener != null) {
-
+        viewHolder.getTextViewName().setText(products.get(i).getName());
+        viewHolder.getTextViewUPC().setText(products.get(i).getUpc());
+        if (this.onModelClickListener != null) {
+            viewHolder.getProductItem().setOnClickListener(v ->
+                    this.onModelClickListener.onClick(this.products.get(i)));
         }
     }
 
+    /**
+     * @return The number of items in this products
+     */
     @Override
     public int getItemCount() {
-        return list.size();
+        return products.size();
     }
 
+    /**
+     * The ViewHolder for the Product products item
+     */
     class ViewHolder extends RecyclerView.ViewHolder {
-        final View itemView;
-        final TextView textViewScanItem;
+        private final TextView textViewName;
+        private final TextView textViewUPC;
+        private final View productItem;
         ViewHolder(@NonNull View itemView) {
             super(itemView);
-            this.itemView = itemView;
-            textViewScanItem = itemView.findViewById(R.id.textViewScanItem);
+            textViewName = itemView.findViewById(R.id.textViewName);
+            textViewUPC = itemView.findViewById(R.id.textViewUPC);
+            this.productItem = itemView.findViewById(R.id.cardViewProduct);
         }
+        TextView getTextViewName() {
+            return textViewName;
+        }
+        TextView getTextViewUPC() {
+            return textViewUPC;
+        }
+        View getProductItem() { return productItem; }
     }
 
 }

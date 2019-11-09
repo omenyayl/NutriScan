@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".profile.views.ProfileActivity">
+    tools:context=".profile.ProfileController">
 
     <android.support.v4.widget.NestedScrollView
         android:layout_width="0dp"
@@ -41,7 +41,7 @@
                 android:paddingLeft="16dp"
                 android:textColor="@color/black"
                 android:layout_height="wrap_content"
-                android:text="2313 kcal" />
+                android:text="@string/sample_calories" />
 
             <TextView
                 android:id="@+id/textViewTotalFatName"
@@ -58,7 +58,7 @@
                 android:paddingLeft="16dp"
                 android:textColor="@color/black"
                 android:layout_height="wrap_content"
-                android:text="5.6 g" />
+                android:text="@string/sample_amount" />
 
             <TextView
                 android:id="@+id/textViewCholesterolName"
@@ -75,7 +75,7 @@
                 android:paddingLeft="16dp"
                 android:textColor="@color/black"
                 android:layout_height="wrap_content"
-                android:text="7 mg" />
+                android:text="@string/sample_amount2" />
 
 
             <TextView
@@ -93,7 +93,7 @@
                 android:paddingLeft="16dp"
                 android:textColor="@color/black"
                 android:layout_height="wrap_content"
-                android:text="340 mg" />
+                android:text="@string/sample_amount3" />
 
             <TextView
                 android:id="@+id/textViewCarbohydrateName"
@@ -110,7 +110,7 @@
                 android:paddingLeft="16dp"
                 android:textColor="@color/black"
                 android:layout_height="wrap_content"
-                android:text="343 g" />
+                android:text="@string/sample_amount3" />
 
             <TextView
                 android:id="@+id/textViewProteinName"
@@ -127,7 +127,7 @@
                 android:paddingLeft="16dp"
                 android:textColor="@color/black"
                 android:layout_height="wrap_content"
-                android:text="110 g" />
+                android:text="@string/sample_amount2" />
 
             <TextView
                 android:id="@+id/textViewScanHistoryName"
@@ -140,7 +140,7 @@
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/recyclerViewScanHistory"
                 android:layout_width="match_parent"
-                android:layout_marginLeft="16dp"
+                android:layout_marginStart="16dp"
                 android:layout_height="match_parent"
                 />
 
