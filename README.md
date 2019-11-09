@@ -5,7 +5,7 @@ Scan food items and obtain their health analysis!
 git clone and import to Android Studio
 
 ## File Structure
-```
+```python
 .
 ├── AndroidManifest.xml
 ├── java
