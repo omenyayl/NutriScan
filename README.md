@@ -6,7 +6,7 @@ git clone and import to Android Studio
 
 ## File Structure
 ```python
-.
+app/src/main/
 ├── AndroidManifest.xml
 ├── java
 │   └── com
