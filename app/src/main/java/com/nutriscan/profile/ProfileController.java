@@ -81,7 +81,7 @@ public class ProfileController extends AppCompatActivity {
     private void initScanHistory() {
         IScanLog<Product> products = new ScanLog();
         /* Sample items */
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 25; i++) {
             products.addItem(new Product(String.format(Locale.US,"%012d", i), "Product " + i));
         }
         ScanHistoryAdapter adapter = new ScanHistoryAdapter(products);
