@@ -1,7 +1,6 @@
 package com.nutriscan.profile;
 
 import android.Manifest;
-import android.annotation.SuppressLint;
 import android.arch.lifecycle.MutableLiveData;
 import android.content.Context;
 import android.content.pm.PackageManager;
@@ -47,16 +46,11 @@ public class ProfileController extends AppCompatActivity {
     /**
      * Gets the device identifier from the phone and posts its value into this.liveDeviceID
      */
-    @SuppressLint("HardwareIds")
     private void obtainDeviceID(MutableLiveData<String> liveDeviceID) {
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE) == PackageManager.PERMISSION_GRANTED) {
             String IMEI;
-            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-                IMEI = ((TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE)).getImei();
-                if (IMEI == null) IMEI = ((TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE)).getMeid();
-            } else {
-                IMEI = ((TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE)).getDeviceId();
-            }
+            IMEI = ((TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE)).getImei();
+            if (IMEI == null) IMEI = ((TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE)).getMeid();
             liveDeviceID.postValue(IMEI);
         } else {
             ActivityCompat.requestPermissions(this,
