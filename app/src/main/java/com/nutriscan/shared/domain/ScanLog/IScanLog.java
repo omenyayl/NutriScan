@@ -7,6 +7,6 @@ import com.nutriscan.shared.domain.Product;
 import java.util.List;
 
 public interface IScanLog<E> {
-    void addItem(@NonNull Product p);
+    void addItem(@NonNull E p);
     List<E> getItems();
 }

@@ -10,7 +10,7 @@ import android.widget.TextView;
 import com.nutriscan.R;
 import com.nutriscan.misc.listeners.OnModelClick;
 import com.nutriscan.shared.domain.Product;
-import com.nutriscan.shared.domain.ScanLog.ScanLog;
+import com.nutriscan.shared.domain.ScanLog.IScanLog;
 
 import java.util.List;
 
@@ -21,7 +21,7 @@ public class ScanHistoryAdapter extends RecyclerView.Adapter<ScanHistoryAdapter.
     private List<Product> products;
     private OnModelClick<Product> onModelClickListener;
 
-    public ScanHistoryAdapter(ScanLog scanLog) {
+    public ScanHistoryAdapter(IScanLog<Product> scanLog) {
         this.products = scanLog.getItems();
     }
 

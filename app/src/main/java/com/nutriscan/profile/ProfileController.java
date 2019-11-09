@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.nutriscan.R;
 import com.nutriscan.profile.listAdapters.ScanHistoryAdapter;
 import com.nutriscan.shared.domain.Product;
+import com.nutriscan.shared.domain.ScanLog.IScanLog;
 import com.nutriscan.shared.domain.ScanLog.ScanLog;
 
 import java.util.Locale;
@@ -78,7 +79,7 @@ public class ProfileController extends AppCompatActivity {
     }
 
     private void initScanHistory() {
-        ScanLog products = new ScanLog();
+        IScanLog<Product> products = new ScanLog();
         /* Sample items */
         for (int i = 0; i < 100; i++) {
             products.addItem(new Product(String.format(Locale.US,"%012d", i), "Product " + i));
