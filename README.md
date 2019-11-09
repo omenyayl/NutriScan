@@ -6,34 +6,36 @@ git clone and import to Android Studio
 
 ## File Structure
 ```python
-app/src/main/
 ├── AndroidManifest.xml
 ├── java
 │   └── com
 │       └── nutriscan
-│           ├── enums
-│           │   └── Unit.java # Enum containing most unit names 
-│           ├── listeners
-│           │   └── OnModelClick.java # Listener currently used in ScanHistoryAdapter
-│           ├── profile # Directory containing code for the profile functional area
-│           │   ├── ProfileController.java 
+│           ├── analysis # Package for the analysis functional area
+│           ├── misc
+│           │   ├── enums
+│           │   │   └── Unit.java # Enum containing most unit names 
+│           │   ├── listeners
+│           │   │   └── OnModelClick.java # Listener currently used in ScanHistoryAdapter
+│           │   └── utils # static utility methods are here
+│           │       └── NutrientUtils.java
+│           ├── profile # Package for the profile functional area
+│           │   ├── ProfileController.java
 │           │   └── listAdapters
-│           │       └── ScanHistoryAdapter.java # Used to display the scan history RecyclerView
-│           ├── shared
-│           │   ├── domain # Domain objects are here
-│           │   │   ├── Analysis.java 
-│           │   │   ├── HealthFactor.java 
-│           │   │   ├── Ingredient.java
-│           │   │   ├── Nutrient.java
-│           │   │   ├── Person.java
-│           │   │   ├── Product.java
-│           │   │   └── ScanLog
-│           │   │       ├── IScanLog.java
-│           │   │       └── ScanLog.java
-│           │   └── repositories # Repositories that are responsible for server communication
-│           │       └── ScanListRepository.java
-│           └── utils # static utility methods are here
-│               └── NutrientUtils.java
+│           │       └── ScanHistoryAdapter.java
+│           ├── scan # Package for the scan functional area
+│           └── shared
+│               ├── domain # Domain objects are here
+│               │   ├── Analysis.java
+│               │   ├── HealthFactor.java
+│               │   ├── Ingredient.java
+│               │   ├── Nutrient.java
+│               │   ├── Person.java
+│               │   ├── Product.java
+│               │   └── ScanLog
+│               │       ├── IScanLog.java
+│               │       └── ScanLog.java
+│               └── repositories # Repositories that are responsible for server communication
+│                   └── ScanListRepository.java
 └── res
     ├── drawable
     │   └── ic_launcher_background.xml
