@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import com.nutriscan.R;
-import com.nutriscan.listeners.OnModelClick;
+import com.nutriscan.misc.listeners.OnModelClick;
 import com.nutriscan.shared.domain.Product;
 import com.nutriscan.shared.domain.ScanLog.ScanLog;
 

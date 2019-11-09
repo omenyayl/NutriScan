@@ -1,4 +1,4 @@
-package com.nutriscan.enums;
+package com.nutriscan.misc.enums;
 
 /**
  * Unit of measure

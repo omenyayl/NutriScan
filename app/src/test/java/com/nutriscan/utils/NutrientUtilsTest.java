@@ -1,6 +1,7 @@
 package com.nutriscan.utils;
 
-import com.nutriscan.enums.Unit;
+import com.nutriscan.misc.enums.Unit;
+import com.nutriscan.misc.utils.NutrientUtils;
 
 import org.junit.Test;
 

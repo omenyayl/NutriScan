@@ -1,7 +1,7 @@
-package com.nutriscan.utils;
+package com.nutriscan.misc.utils;
 
 import android.support.annotation.NonNull;
-import com.nutriscan.enums.Unit;
+import com.nutriscan.misc.enums.Unit;
 
 public class NutrientUtils {
     /**

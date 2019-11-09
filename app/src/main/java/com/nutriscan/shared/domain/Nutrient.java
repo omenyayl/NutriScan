@@ -2,7 +2,7 @@ package com.nutriscan.shared.domain;
 
 import android.support.annotation.NonNull;
 
-import com.nutriscan.enums.Unit;
+import com.nutriscan.misc.enums.Unit;
 
 /**
  * An immutable nutrient domain object
