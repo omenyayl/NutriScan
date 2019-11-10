@@ -3,6 +3,7 @@ package com.nutriscan.profile;
 import android.Manifest;
 import android.arch.lifecycle.MutableLiveData;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
@@ -17,6 +18,7 @@ import android.widget.Toast;
 
 import com.nutriscan.R;
 import com.nutriscan.profile.listAdapters.ScanHistoryAdapter;
+import com.nutriscan.scan.ScanActivity;
 import com.nutriscan.shared.domain.Person;
 import com.nutriscan.shared.domain.Product;
 import com.nutriscan.shared.domain.ScanLog.IScanLog;
@@ -84,6 +86,8 @@ public class ProfileController extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.action_scan) {
+            Intent scanIntent = new Intent(this, ScanActivity.class);
+            startActivity(scanIntent);
             return true;
         }
         return super.onOptionsItemSelected(item);
