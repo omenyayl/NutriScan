@@ -15,4 +15,10 @@ public final class Person {
     public String getId() {
         return id;
     }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return this.id;
+    }
 }

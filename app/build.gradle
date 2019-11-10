@@ -4,6 +4,7 @@ android {
     compileSdkVersion 28
     buildToolsVersion "29.0.2"
     defaultConfig {
+        vectorDrawables.useSupportLibrary = true
         applicationId "com.nutriscan"
         minSdkVersion 26
         targetSdkVersion 28

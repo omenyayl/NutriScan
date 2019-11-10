@@ -25,6 +25,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/h1"
                 android:padding="8dp"
+                android:textColor="@color/black"
                 android:text="@string/nutrition_summary" />
 
             <TextView
@@ -135,6 +136,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/h1"
                 android:padding="8dp"
+                android:textColor="@color/black"
                 android:text="@string/scan_history" />
 
             <android.support.v7.widget.RecyclerView
