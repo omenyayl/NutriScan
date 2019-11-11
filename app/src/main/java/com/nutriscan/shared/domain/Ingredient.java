@@ -1,6 +1,6 @@
 package com.nutriscan.shared.domain;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 /**
  * An immutable ingredient domain object

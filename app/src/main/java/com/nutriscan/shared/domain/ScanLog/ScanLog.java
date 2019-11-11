@@ -1,6 +1,6 @@
 package com.nutriscan.shared.domain.ScanLog;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import com.nutriscan.shared.domain.Product;
 

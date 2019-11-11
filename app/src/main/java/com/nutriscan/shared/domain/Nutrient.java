@@ -1,6 +1,6 @@
 package com.nutriscan.shared.domain;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import com.nutriscan.misc.enums.Unit;
 

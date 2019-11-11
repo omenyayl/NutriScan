@@ -1,6 +1,6 @@
 package com.nutriscan.shared.repositories;
 
-import android.arch.lifecycle.MutableLiveData;
+import androidx.lifecycle.MutableLiveData;
 
 import com.nutriscan.shared.domain.Person;
 import com.nutriscan.shared.domain.Product;
