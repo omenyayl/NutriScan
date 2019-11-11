@@ -12,6 +12,8 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 import com.nutriscan.R;
+import com.nutriscan.shared.domain.Person;
+import com.nutriscan.shared.repositories.PersonRepository;
 
 import java.util.Objects;
 

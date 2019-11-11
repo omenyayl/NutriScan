@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -40,16 +41,12 @@ public class ProfileController extends AppCompatActivity {
 
 
     private void initObservations() {
+        // first obtain the Person model then use that person model to obtain that person's
+        // scan history
         PersonRepository.getInstance().getPerson().observe(this, person -> {
             if (person != null) {
-                // TODO: Device identifier obtained here, do something with it
-                Toast.makeText(this, "ID: " + person, Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        ScanHistoryRepository.getInstance().getProducts().observe(this, scanLog -> {
-            if (scanLog != null) {
-                initScanHistory(scanLog);
+                ScanHistoryRepository.getInstance()
+                        .getProducts(person).observe(this, this::onRetrieveScanHistory);
             }
         });
     }
@@ -59,6 +56,16 @@ public class ProfileController extends AppCompatActivity {
     }
 
     // region <Scan History>
+
+    /**
+     * Called upon retrieval of the scan log
+     * @param scanLog The retrieved scan log (might be null)
+     */
+    private void onRetrieveScanHistory(@Nullable IScanLog<Product> scanLog) {
+        if (scanLog != null) {
+            initScanHistory(scanLog);
+        }
+    }
 
     private void initScanHistory(IScanLog<Product> scanLog) {
         ScanHistoryAdapter adapter = new ScanHistoryAdapter(scanLog);
@@ -96,15 +103,17 @@ public class ProfileController extends AppCompatActivity {
      * Gets the device identifier from the phone and posts its value into this.liveDeviceID
      */
     private void obtainDeviceID() {
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE) == PackageManager.PERMISSION_GRANTED) {
-            String deviceID;
-            deviceID = ((TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE)).getImei();
-            if (deviceID == null) deviceID = ((TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE)).getMeid();
-            PersonRepository.getInstance().getPerson().postValue(new Person(deviceID));
-        } else {
-            ActivityCompat.requestPermissions(this,
-                    new String[]{Manifest.permission.READ_PHONE_STATE},
-                    PERMISSION_REQUEST_PHONE_STATE);
+        if (PersonRepository.getInstance().getPerson().getValue() == null) {
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE) == PackageManager.PERMISSION_GRANTED) {
+                String deviceID;
+                deviceID = ((TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE)).getImei();
+                if (deviceID == null) deviceID = ((TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE)).getMeid();
+                PersonRepository.getInstance().getPerson().postValue(new Person(deviceID));
+            } else {
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.READ_PHONE_STATE},
+                        PERMISSION_REQUEST_PHONE_STATE);
+            }
         }
     }
 

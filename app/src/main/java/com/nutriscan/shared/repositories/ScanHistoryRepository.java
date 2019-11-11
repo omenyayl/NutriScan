@@ -2,6 +2,7 @@ package com.nutriscan.shared.repositories;
 
 import android.arch.lifecycle.MutableLiveData;
 
+import com.nutriscan.shared.domain.Person;
 import com.nutriscan.shared.domain.Product;
 import com.nutriscan.shared.domain.ScanLog.IScanLog;
 import com.nutriscan.shared.domain.ScanLog.ScanLog;
@@ -36,9 +37,12 @@ public class ScanHistoryRepository {
 
     /**
      * @return An observable containing the scan history of products
+     * @param person The person of which to obtain the scan log
      */
-    public MutableLiveData<IScanLog<Product>> getProducts() {
+    public MutableLiveData<IScanLog<Product>> getProducts(Person person) {
         return scanLog;
     }
+
+
 
 }
