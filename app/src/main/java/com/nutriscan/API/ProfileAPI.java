@@ -39,7 +39,7 @@ public class ProfileAPI {
                                            Context context,
                                            Person person) {
         RequestQueue requestQueue = Volley.newRequestQueue(context);
-        String url = String.format("%s/scans/%s", APIConstants.API_BASE_URL, person.getId());
+        String url = Endpoints.getProfileScanHistoryEndpoint(person);
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
                 url,
                 response -> ((Runnable) () -> { // running a new thread to not overload the ui thread
