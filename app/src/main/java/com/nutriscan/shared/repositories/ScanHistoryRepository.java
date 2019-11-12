@@ -1,5 +1,8 @@
 package com.nutriscan.shared.repositories;
 
+import android.content.Context;
+
+import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 
 import com.nutriscan.shared.domain.Person;
@@ -18,16 +21,15 @@ public class ScanHistoryRepository {
 
     private ScanHistoryRepository() {
         scanLog = new MutableLiveData<>();
-        scanLog.postValue(getMockData());
     }
 
-    private IScanLog<Product> getMockData() {
+    private void mockRequestProducts() {
         IScanLog<Product> products = new ScanLog();
         /* Sample items */
         for (int i = 0; i < 25; i++) {
             products.addItem(new Product(String.format(Locale.US,"%012d", i), "Product " + i));
         }
-        return products;
+        scanLog.postValue(products);
     }
 
     public static ScanHistoryRepository getInstance() {
@@ -39,10 +41,10 @@ public class ScanHistoryRepository {
      * @return An observable containing the scan history of products
      * @param person The person of which to obtain the scan log
      */
-    public MutableLiveData<IScanLog<Product>> getProducts(Person person) {
+    public MutableLiveData<IScanLog<Product>> getProducts(Context context, @NonNull Person person) {
+//        ProfileAPI.getInstance().enqueueGetProductsRequest(this.scanLog, context, person);
+        mockRequestProducts();
         return scanLog;
     }
-
-
 
 }

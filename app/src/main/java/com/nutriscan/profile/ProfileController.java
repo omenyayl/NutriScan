@@ -46,7 +46,7 @@ public class ProfileController extends AppCompatActivity {
         PersonRepository.getInstance().getPerson().observe(this, person -> {
             if (person != null) {
                 ScanHistoryRepository.getInstance()
-                        .getProducts(person).observe(this, this::onRetrieveScanHistory);
+                        .getProducts(this, person).observe(this, this::onRetrieveScanHistory);
             }
         });
     }
