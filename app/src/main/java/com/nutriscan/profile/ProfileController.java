@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.telephony.TelephonyManager;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.nutriscan.R;
@@ -28,6 +29,14 @@ import com.nutriscan.shared.repositories.ScanHistoryRepository;
 public class ProfileController extends AppCompatActivity {
 
     private RecyclerView recyclerViewScanHistory;
+    private TextView textViewCaloriesValue;
+    private TextView textViewTotalFatValue;
+    private TextView textViewCholesterolValue;
+    private TextView textViewSodiumValue;
+    private TextView textViewCarbohydrateValue;
+    private TextView textViewProteinValue;
+
+
     private static final int PERMISSION_REQUEST_PHONE_STATE = 101;
 
     @Override
@@ -53,6 +62,12 @@ public class ProfileController extends AppCompatActivity {
 
     private void bindViews() {
         recyclerViewScanHistory = findViewById(R.id.recyclerViewScanHistory);
+        textViewCaloriesValue = findViewById(R.id.textViewCaloriesValue);
+        textViewTotalFatValue =findViewById(R.id.textViewTotalFatValue);
+        textViewCholesterolValue = findViewById(R.id.textViewCholesterolValue);
+        textViewSodiumValue = findViewById(R.id.textViewSodiumValue);
+        textViewCarbohydrateValue = findViewById(R.id.textViewCarbohydrateValue);
+        textViewProteinValue = findViewById(R.id.textViewProteinValue);
     }
 
     // region <Scan History>
