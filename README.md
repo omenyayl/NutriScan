@@ -4,7 +4,8 @@ Scan food items and obtain their health analysis!
 ## Development
 git clone and import to Android Studio
 
-Note: you must add an API_URL to the local.properties file:
+NOTE: you must add an API_URL to the local.properties file:
+For instance,
 ```
 API_URL="http://192.168.50.221:8080"
 ```
