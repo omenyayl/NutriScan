@@ -5,13 +5,11 @@ import android.content.Context;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 
-import com.nutriscan.API.ProfileAPI;
 import com.nutriscan.shared.domain.Person;
 import com.nutriscan.shared.domain.Product;
 import com.nutriscan.shared.domain.ScanLog.IScanLog;
 import com.nutriscan.shared.domain.ScanLog.ScanLog;
 
-import java.util.Locale;
 
 /**
  * Repository containing the scan history data
@@ -28,7 +26,7 @@ public class ScanHistoryRepository {
         IScanLog<Product> products = new ScanLog();
         /* Sample items */
         for (int i = 0; i < 25; i++) {
-            products.addItem(new Product(String.format(Locale.US,"%012d", i), "Product " + i));
+            products.addItem(new Product(i, "Product " + i));
         }
         scanLog.postValue(products);
     }

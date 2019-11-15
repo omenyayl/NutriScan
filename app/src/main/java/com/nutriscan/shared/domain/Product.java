@@ -6,15 +6,15 @@ import androidx.annotation.NonNull;
  * The immutable product domain object
  */
 public final class Product {
-    private final String upc;
+    private final long upc;
     private final String name;
 
-    public Product(@NonNull String upc, @NonNull String name) {
+    public Product(long upc, @NonNull String name) {
         this.upc = upc;
         this.name = name;
     }
 
-    public String getUpc() {
+    public long getUpc() {
         return upc;
     }
 
