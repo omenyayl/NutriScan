@@ -47,7 +47,7 @@ public class ProfileAPI {
                         IScanLog<Product> scanLog = new ScanLog();
                         for (int i = 0; i < response.length(); i++) {
                             JSONObject product = response.getJSONObject(i);
-                            String upc = product.getString("upc");
+                            long upc = product.getLong("upc");
                             String name = product.getString("name");
                             scanLog.addItem(new Product(upc, name));
                         }

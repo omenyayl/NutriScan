@@ -13,6 +13,7 @@ import com.nutriscan.shared.domain.Product;
 import com.nutriscan.shared.domain.ScanLog.IScanLog;
 
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Adapter for a {@link RecyclerView} that displays a products of Products
@@ -58,7 +59,7 @@ public class ScanHistoryAdapter extends RecyclerView.Adapter<ScanHistoryAdapter.
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder viewHolder, int i) {
         viewHolder.getTextViewName().setText(products.get(i).getName());
-        viewHolder.getTextViewUPC().setText(products.get(i).getUpc());
+        viewHolder.getTextViewUPC().setText(String.format(Locale.US, "%d", products.get(i).getUpc()));
         if (this.onModelClickListener != null) {
             viewHolder.getProductItem().setOnClickListener(v ->
                     this.onModelClickListener.onClick(this.products.get(i)));
