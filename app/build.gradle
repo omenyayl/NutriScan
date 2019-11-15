@@ -14,7 +14,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        buildConfigField "String", "API_URL", localProperties.containsKey('API_URL') ? localProperties['API_URL'] : ""
+        buildConfigField "String", "API_URL", localProperties.containsKey('API_URL') ? localProperties['API_URL'] : "\"localhost\""
     }
     buildTypes {
         release {
