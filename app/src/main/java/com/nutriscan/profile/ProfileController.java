@@ -12,6 +12,7 @@ import android.os.Bundle;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.telephony.TelephonyManager;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
@@ -54,6 +55,8 @@ public class ProfileController extends AppCompatActivity {
         // scan history
         PersonRepository.getInstance().getPerson().observe(this, person -> {
             if (person != null) {
+                Log.d("ProfileController", person.getId());
+                Toast.makeText(this, "Person ID: " + person.getId(), Toast.LENGTH_LONG).show();
                 ScanHistoryRepository.getInstance()
                         .getProducts(this, person).observe(this, this::onRetrieveScanHistory);
             }
