@@ -6,10 +6,15 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 
 import com.nutriscan.API.ProfileAPI;
+import com.nutriscan.misc.enums.NutrientType;
+import com.nutriscan.shared.domain.Nutrient;
 import com.nutriscan.shared.domain.Person;
 import com.nutriscan.shared.domain.Product;
 import com.nutriscan.shared.domain.ScanLog.IScanLog;
 import com.nutriscan.shared.domain.ScanLog.ScanLog;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -27,7 +32,9 @@ public class ScanHistoryRepository {
         IScanLog<Product> products = new ScanLog();
         /* Sample items */
         for (int i = 0; i < 25; i++) {
-            products.addItem(new Product(i, "Product " + i));
+            List<Nutrient> nutrientList = new ArrayList<>();
+            nutrientList.add(new Nutrient(NutrientType.ENERGY, 10*i, "kcal"));
+            products.addItem(new Product(i, "Product " + i, nutrientList));
         }
         scanLog.postValue(products);
     }
@@ -42,8 +49,8 @@ public class ScanHistoryRepository {
      * @param person The person of which to obtain the scan log
      */
     public MutableLiveData<IScanLog<Product>> getProducts(Context context, @NonNull Person person) {
-//        ProfileAPI.getInstance().enqueueGetProductsRequest(this.scanLog, context, person);
-        mockRequestProducts();
+        ProfileAPI.getInstance().enqueueGetProductsRequest(this.scanLog, context, person);
+//        mockRequestProducts();
         return scanLog;
     }
 
