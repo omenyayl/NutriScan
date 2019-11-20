@@ -84,7 +84,7 @@ public class ScanHistoryAdapter extends RecyclerView.Adapter<ScanHistoryAdapter.
         ViewHolder(@NonNull View itemView) {
             super(itemView);
             textViewName = itemView.findViewById(R.id.textViewName);
-            textViewUPC = itemView.findViewById(R.id.textViewUPC);
+            textViewUPC = itemView.findViewById(R.id.textViewNameValue);
             this.productItem = itemView.findViewById(R.id.cardViewProduct);
         }
         TextView getTextViewName() {
