@@ -21,7 +21,7 @@ public class FoodRepository {
         this.scannedItem = new MutableLiveData<>();
     }
 
-    public FoodRepository getInstance() {
+    public static FoodRepository getInstance() {
         if (instance == null) instance = new FoodRepository();
         return instance;
     }
