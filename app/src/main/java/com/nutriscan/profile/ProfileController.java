@@ -21,6 +21,7 @@ import android.widget.Toast;
 import com.nutriscan.R;
 import com.nutriscan.profile.listAdapters.ScanHistoryAdapter;
 import com.nutriscan.scan.ProductDetailsView;
+import com.nutriscan.shared.domain.Nutrient;
 import com.nutriscan.shared.domain.Person;
 import com.nutriscan.shared.domain.Product;
 import com.nutriscan.shared.domain.ScanLog.IScanLog;
@@ -82,6 +83,14 @@ public class ProfileController extends AppCompatActivity {
     private void onRetrieveScanHistory(@Nullable IScanLog<Product> scanLog) {
         if (scanLog != null) {
             initScanHistory(scanLog);
+            for (Product product : scanLog.getItems()) {
+                for (Nutrient nutrient : product.getNutrients()) {
+                    // TODO: traverse nutrients to update profile nutrient data
+
+                    // For debugging purposes bottom logs the nutrient data (shown in Logcat).
+                    Log.d(this.getClass().getName(), nutrient.toString() + ": " + nutrient.getAmount() + ' ' + nutrient.getUnit());
+                }
+            }
         }
     }
 
