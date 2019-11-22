@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import com.nutriscan.R;
+import com.nutriscan.misc.utils.NutrientUtils;
 import com.nutriscan.shared.domain.Nutrient;
 
 import java.util.List;
@@ -48,6 +49,9 @@ public class NutrientListAdapter extends RecyclerView.Adapter<NutrientListAdapte
         viewHolder.getTextViewNutrientType().setText(nutrient.getNutrientType().toString());
         viewHolder.getTextViewNutrientAmount().setText(String.format(Locale.US, "%.0f", nutrient.getAmount()));
         viewHolder.getTextViewNutrientUnit().setText(nutrient.getUnit().toString());
+        viewHolder.getTextViewDailyValue().setText(
+                String.format(Locale.US, "(%.0f%% DV)", NutrientUtils.getPercentDailyValue(nutrient))
+        );
     }
 
     /**
@@ -65,12 +69,15 @@ public class NutrientListAdapter extends RecyclerView.Adapter<NutrientListAdapte
         private final TextView textViewNutrientType;
         private final TextView textViewNutrientAmount;
         private final TextView textViewNutrientUnit;
+        private final TextView textViewDailyValue;
+
 
         ViewHolder(@NonNull View itemView) {
             super(itemView);
             this.textViewNutrientType = itemView.findViewById(R.id.textViewNutrientType);
             this.textViewNutrientAmount = itemView.findViewById(R.id.textViewNutrientAmount);
             this.textViewNutrientUnit = itemView.findViewById(R.id.textViewNutrientUnit);
+            this.textViewDailyValue = itemView.findViewById(R.id.textViewDailyValue);
         }
 
         TextView getTextViewNutrientType() {
@@ -83,6 +90,10 @@ public class NutrientListAdapter extends RecyclerView.Adapter<NutrientListAdapte
 
         TextView getTextViewNutrientUnit() {
             return textViewNutrientUnit;
+        }
+
+        public TextView getTextViewDailyValue() {
+            return textViewDailyValue;
         }
     }
 

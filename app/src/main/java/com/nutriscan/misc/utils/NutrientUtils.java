@@ -1,7 +1,10 @@
 package com.nutriscan.misc.utils;
 
 import androidx.annotation.NonNull;
+
+import com.nutriscan.misc.enums.NutrientType;
 import com.nutriscan.misc.enums.Unit;
+import com.nutriscan.shared.domain.Nutrient;
 
 public class NutrientUtils {
     /**
@@ -15,6 +18,14 @@ public class NutrientUtils {
             // TODO fix
         }
         throw new IllegalArgumentException();
+    }
+
+    /**
+     * @param nutrient The nutrient of which to get the daily value
+     * @return The percent of the daily value given the nutrient
+     */
+    public static double getPercentDailyValue(Nutrient nutrient) {
+        return nutrient.getAmount() / nutrient.getNutrientType().getDailyValue() * 100;
     }
 
 }

@@ -6,7 +6,7 @@ package com.nutriscan.misc.enums;
 public enum Unit {
     mg("mg"),
     g("g"),
-    aeg("aeg"),
+    aeg("μg"),
     kcal("kcal");
 
     private String name;
