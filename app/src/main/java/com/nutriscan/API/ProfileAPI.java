@@ -11,6 +11,7 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.nutriscan.misc.constants.APIConstants;
 import com.nutriscan.misc.enums.NutrientType;
+import com.nutriscan.misc.enums.Unit;
 import com.nutriscan.shared.domain.Nutrient;
 import com.nutriscan.shared.domain.Person;
 import com.nutriscan.shared.domain.Product;
@@ -91,7 +92,7 @@ public class ProfileAPI {
                 } catch (IllegalArgumentException e) {
                     throw new JSONException(e.toString());
                 }
-                nutrientList.add(new Nutrient(nutrientType, nutrientAmount, nutrientUnit));
+                nutrientList.add(new Nutrient(nutrientType, nutrientAmount, Unit.fromString(nutrientUnit)));
             }
             scanLog.addItem(new Product(upc, name, nutrientList));
         }

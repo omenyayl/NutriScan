@@ -7,6 +7,7 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.nutriscan.API.ProfileAPI;
 import com.nutriscan.misc.enums.NutrientType;
+import com.nutriscan.misc.enums.Unit;
 import com.nutriscan.shared.domain.Nutrient;
 import com.nutriscan.shared.domain.Person;
 import com.nutriscan.shared.domain.Product;
@@ -33,7 +34,7 @@ public class ScanHistoryRepository {
         /* Sample items */
         for (int i = 0; i < 25; i++) {
             List<Nutrient> nutrientList = new ArrayList<>();
-            nutrientList.add(new Nutrient(NutrientType.ENERGY, 10*i, "kcal"));
+            nutrientList.add(new Nutrient(NutrientType.ENERGY, 10*i, Unit.kcal));
             products.addItem(new Product(i, "Product " + i, nutrientList));
         }
         scanLog.postValue(products);
