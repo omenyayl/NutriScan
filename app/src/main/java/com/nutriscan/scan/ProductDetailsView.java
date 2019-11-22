@@ -8,11 +8,23 @@ import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.os.Bundle;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.nutriscan.R;
+import com.nutriscan.misc.enums.NutrientType;
+import com.nutriscan.misc.enums.Unit;
+import com.nutriscan.scan.listAdapters.NutrientListAdapter;
+import com.nutriscan.shared.domain.Nutrient;
+import com.nutriscan.shared.domain.Product;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
 import java.util.Objects;
 
 /**
@@ -23,12 +35,44 @@ public class ProductDetailsView extends AppCompatActivity {
     private static final int REQUEST_CODE_SCAN = 102;
     private static final int REQUEST_CAMERA_PERMISSION = 103;
 
+    private TextView textViewProductName;
+    private TextView textViewUPCValue;
+    private RecyclerView recyclerViewNutrients;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_details);
+        bindViews();
+
+        List<Nutrient> nutrients = new ArrayList<>();
+        nutrients.add(new Nutrient(NutrientType.ENERGY, 200.0, Unit.kcal));
+        nutrients.add(new Nutrient(NutrientType.FAT, 20.0, Unit.g));
+        nutrients.add(new Nutrient(NutrientType.SUGARS, 40.0, Unit.g));
+        Product product = new Product(123456, "Oreo Cookies", nutrients);
+        updateProductData(product);
+
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
-        launchScanner();
+//        launchScanner();
+    }
+
+    private void bindViews(){
+        this.textViewProductName = findViewById(R.id.textViewProductName);
+        this.textViewUPCValue = findViewById(R.id.textViewUPCValue);
+        this.recyclerViewNutrients = findViewById(R.id.recyclerViewNutrients);
+    }
+
+    private void initNutrientsList(List<Nutrient> nutrientList) {
+        NutrientListAdapter adapter = new NutrientListAdapter(nutrientList);
+        recyclerViewNutrients.setNestedScrollingEnabled(false);
+        recyclerViewNutrients.setLayoutManager(new LinearLayoutManager(this));
+        recyclerViewNutrients.setAdapter(adapter);
+    }
+
+    private void updateProductData(Product product) {
+        this.textViewProductName.setText(product.getName());
+        this.textViewUPCValue.setText(String.format(Locale.US, "%d", product.getUpc()));
+        initNutrientsList(product.getNutrients());
     }
 
     /**

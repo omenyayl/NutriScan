@@ -4,10 +4,16 @@ package com.nutriscan.misc.enums;
  * Unit of measure
  */
 public enum Unit {
-    mg,
-    g,
-    aeg,
-    kcal;
+    mg("mg"),
+    g("g"),
+    aeg("aeg"),
+    kcal("kcal");
+
+    private String name;
+
+    Unit(String name) {
+        this.name = name;
+    }
 
     public static Unit fromString(String string) {
         switch (string.toLowerCase().trim()) {
@@ -18,5 +24,10 @@ public enum Unit {
             case "aeg": return Unit.aeg;
         }
         throw new IllegalArgumentException("Unknown unit: " + string);
+    }
+
+    @Override
+    public String toString() {
+        return this.name;
     }
 }
