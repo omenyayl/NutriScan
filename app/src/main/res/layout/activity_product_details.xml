@@ -53,7 +53,7 @@
                 android:paddingLeft="16dp"
                 android:textColor="@color/black"
                 android:layout_height="wrap_content"
-                android:text="044000015923" />
+                android:text="-" />
 
             <TextView
                 android:id="@+id/textViewNutrientsTitle"

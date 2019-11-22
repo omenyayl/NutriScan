@@ -27,7 +27,7 @@ public class FoodRepository {
     }
 
     public MutableLiveData<Product> getScannedItem() {
-        mockScannedItem();
+//        mockScannedItem();
         return scannedItem;
     }
 

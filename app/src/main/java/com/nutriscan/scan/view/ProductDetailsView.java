@@ -8,16 +8,19 @@ import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.nutriscan.R;
 import com.nutriscan.analysis.AnalysisView;
-import com.nutriscan.shared.repositories.FoodRepository;
+import com.nutriscan.scan.viewModel.IProductDetailsViewModel;
+import com.nutriscan.scan.viewModel.ProductDetailsViewModel;
 import com.nutriscan.scan.listAdapters.NutrientListAdapter;
 import com.nutriscan.shared.domain.Nutrient;
 import com.nutriscan.shared.domain.Product;
@@ -34,6 +37,8 @@ public class ProductDetailsView extends AppCompatActivity {
     private static final int REQUEST_CODE_SCAN = 102;
     private static final int REQUEST_CAMERA_PERMISSION = 103;
 
+    private IProductDetailsViewModel productDetailsViewModel;
+
     private TextView textViewProductName;
     private TextView textViewUPCValue;
     private RecyclerView recyclerViewNutrients;
@@ -44,11 +49,15 @@ public class ProductDetailsView extends AppCompatActivity {
         setContentView(R.layout.activity_product_details);
         bindViews();
 
-        FoodRepository.getInstance().getScannedItem().observe(this, p -> {
+        productDetailsViewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication())
+                .create(ProductDetailsViewModel.class);
+
+        productDetailsViewModel.getScannedProduct().observe(this, p -> {
             if (p != null) updateProductData(p);
         });
 
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+        productDetailsViewModel.onItemScanned(72527273070L, this);
 //        launchScanner();
     }
 
@@ -77,14 +86,6 @@ public class ProductDetailsView extends AppCompatActivity {
         startActivity(analysisIntent);
     }
 
-    /**
-     * Called when the barcode was scanned
-     * @param barcode Scanned barcode
-     */
-    private void onScanBarcode(String barcode) {
-        Toast.makeText(this, barcode, Toast.LENGTH_SHORT).show();
-    }
-
     // region <scanning>
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -93,7 +94,12 @@ public class ProductDetailsView extends AppCompatActivity {
                 resultCode == RESULT_OK &&
                 data != null &&
                 data.hasExtra(ScanActivity.INTENT_EXTRA_BARCODE)) {
-            onScanBarcode(data.getStringExtra(ScanActivity.INTENT_EXTRA_BARCODE));
+            try {
+                long upc = Long.parseLong(data.getStringExtra(ScanActivity.INTENT_EXTRA_BARCODE));
+                productDetailsViewModel.onItemScanned(upc, this);
+            } catch (NumberFormatException e) {
+                Log.e(getClass().getName(), e.toString());
+            }
         } else if (requestCode == REQUEST_CODE_SCAN && resultCode != RESULT_OK) {
             finish();
         }

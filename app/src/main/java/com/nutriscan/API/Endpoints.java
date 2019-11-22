@@ -5,6 +5,8 @@ import androidx.annotation.NonNull;
 import com.nutriscan.misc.constants.APIConstants;
 import com.nutriscan.shared.domain.Person;
 
+import java.util.Locale;
+
 public class Endpoints {
 
     /**
@@ -13,5 +15,9 @@ public class Endpoints {
      */
     public static String getProfileScanHistoryEndpoint(@NonNull Person person) {
         return String.format("%s/scans/%s", APIConstants.API_BASE_URL, person.getId());
+    }
+
+    public static String getProductEndpoint(long upc) {
+        return String.format(Locale.US, "%s/products/%d", APIConstants.API_BASE_URL, upc);
     }
 }
