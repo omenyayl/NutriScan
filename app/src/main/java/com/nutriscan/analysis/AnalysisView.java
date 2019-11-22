@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.nutriscan.R;
 
-public class AnalysisActivity extends AppCompatActivity {
+public class AnalysisView extends AppCompatActivity {
     private TextView textViewProductName;
     private TextView textViewAnalysis;
     private RecyclerView recyclerViewHealthFactors;
