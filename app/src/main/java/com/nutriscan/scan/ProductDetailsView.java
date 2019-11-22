@@ -15,7 +15,10 @@ import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.nutriscan.R;
+import com.nutriscan.analysis.AnalysisView;
+import com.nutriscan.shared.repositories.FoodRepository;
 import com.nutriscan.misc.enums.NutrientType;
 import com.nutriscan.misc.enums.Unit;
 import com.nutriscan.scan.listAdapters.NutrientListAdapter;
@@ -60,6 +63,7 @@ public class ProductDetailsView extends AppCompatActivity {
         this.textViewProductName = findViewById(R.id.textViewProductName);
         this.textViewUPCValue = findViewById(R.id.textViewUPCValue);
         this.recyclerViewNutrients = findViewById(R.id.recyclerViewNutrients);
+        findViewById(R.id.analyzeButton).setOnClickListener(v -> onAnalyzeButtonClicked());
     }
 
     private void initNutrientsList(List<Nutrient> nutrientList) {
@@ -73,6 +77,11 @@ public class ProductDetailsView extends AppCompatActivity {
         this.textViewProductName.setText(product.getName());
         this.textViewUPCValue.setText(String.format(Locale.US, "%d", product.getUpc()));
         initNutrientsList(product.getNutrients());
+    }
+
+    private void onAnalyzeButtonClicked() {
+        Intent analysisIntent = new Intent(this, AnalysisView.class);
+        startActivity(analysisIntent);
     }
 
     /**
