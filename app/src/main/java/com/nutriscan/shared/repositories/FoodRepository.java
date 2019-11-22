@@ -10,7 +10,7 @@ public class FoodRepository {
 
     }
 
-    public FoodRepository getInstance() {
+    public static FoodRepository getInstance() {
         if (instance == null) instance = new FoodRepository();
         return instance;
     }
