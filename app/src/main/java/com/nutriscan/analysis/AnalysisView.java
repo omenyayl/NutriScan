@@ -13,9 +13,12 @@ import com.nutriscan.R;
 import com.nutriscan.analysis.businessLayer.AnalysisEvaluator;
 import com.nutriscan.analysis.businessLayer.IAnalysisEvaluator;
 import com.nutriscan.analysis.listAdapters.HealthFactorsAdapter;
+import com.nutriscan.shared.domain.Analysis;
 import com.nutriscan.shared.domain.HealthFactor;
+import com.nutriscan.shared.repositories.FoodRepository;
 
 import java.util.List;
+import java.util.Locale;
 
 public class AnalysisView extends AppCompatActivity {
     private TextView textViewProductName;
@@ -27,8 +30,16 @@ public class AnalysisView extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_analysis);
         bindViews();
-        IAnalysisEvaluator analysisEvaluator = new AnalysisEvaluator();
-//        initHealthFactorList(analysisEvaluator.getHealthFactors());
+
+        FoodRepository.getInstance().getScannedItem().observe(this, p -> {
+            if (p != null) {
+                IAnalysisEvaluator analysisEvaluator = new AnalysisEvaluator(p);
+                Analysis analysis = analysisEvaluator.getAnalysis();
+                initHealthFactorList(analysis.getHealthFactors());
+                textViewProductName.setText(p.getName());
+                textViewAnalysis.setText(String.format(Locale.US, "%.1f", analysis.getHealthRating()));
+            }
+        });
     }
 
     private void bindViews(){

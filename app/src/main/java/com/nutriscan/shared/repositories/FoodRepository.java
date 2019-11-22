@@ -27,12 +27,17 @@ public class FoodRepository {
     }
 
     public MutableLiveData<Product> getScannedItem() {
+        mockScannedItem();
         return scannedItem;
     }
 
     private void mockScannedItem() {
         List<Nutrient> nutrients = new ArrayList<>();
-//        nutrients.add(new Nutrient(NutrientType.ENERGY, 400, Unit.kcal));
-//        Product p = new Product();
+        nutrients.add(new Nutrient(NutrientType.ENERGY, 400, Unit.kcal));
+        nutrients.add(new Nutrient(NutrientType.PROTEIN, 20, Unit.g));
+        nutrients.add(new Nutrient(NutrientType.FAT, 500, Unit.g));
+        nutrients.add(new Nutrient(NutrientType.POTASSIUM, 60, Unit.mg));
+        Product p = new Product(1234567,"BROCOOLINIECHEDAR", nutrients);
+        this.scannedItem.postValue(p);
     }
 }

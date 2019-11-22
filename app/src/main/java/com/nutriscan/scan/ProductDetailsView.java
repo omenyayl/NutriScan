@@ -11,7 +11,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.nutriscan.R;
+import com.nutriscan.analysis.AnalysisView;
+import com.nutriscan.shared.repositories.FoodRepository;
 
 import java.util.Objects;
 
@@ -27,8 +30,18 @@ public class ProductDetailsView extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_details);
+        bindViews();
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         launchScanner();
+    }
+
+    private void bindViews() {
+        findViewById(R.id.analyzeButton).setOnClickListener(v -> onAnalyzeButtonClicked());
+    }
+
+    private void onAnalyzeButtonClicked() {
+        Intent analysisIntent = new Intent(this, AnalysisView.class);
+        startActivity(analysisIntent);
     }
 
     /**

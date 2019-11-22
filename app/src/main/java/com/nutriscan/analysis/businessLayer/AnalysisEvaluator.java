@@ -7,9 +7,21 @@ import com.nutriscan.shared.domain.Product;
 import java.util.List;
 
 public class AnalysisEvaluator implements IAnalysisEvaluator{
+
+    private Product product;
+    private Analysis analysis;
+
+    public AnalysisEvaluator(Product p) {
+        this.product = p;
+        this.analysis = new Analysis(p);
+    }
+
     @Override
-    public List<HealthFactor> getHealthFactors(Product p) {
-        Analysis analysis = new Analysis(p);
-        return analysis.getHealthFactors();
+    public Analysis getAnalysis() {
+        return this.analysis;
+    }
+
+    public Product getProduct() {
+        return product;
     }
 }
