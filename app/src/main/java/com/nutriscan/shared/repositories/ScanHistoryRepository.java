@@ -34,7 +34,7 @@ public class ScanHistoryRepository {
         /* Sample items */
         for (int i = 0; i < 25; i++) {
             List<Nutrient> nutrientList = new ArrayList<>();
-            nutrientList.add(new Nutrient(NutrientType.ENERGY, 10*i, Unit.kcal));
+            nutrientList.add(new Nutrient(NutrientType.ENERGY, 10*i));
             products.addItem(new Product(i, "Product " + i, nutrientList));
         }
         scanLog.postValue(products);

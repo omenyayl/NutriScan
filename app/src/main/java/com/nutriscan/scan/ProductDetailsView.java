@@ -49,9 +49,9 @@ public class ProductDetailsView extends AppCompatActivity {
         bindViews();
 
         List<Nutrient> nutrients = new ArrayList<>();
-        nutrients.add(new Nutrient(NutrientType.ENERGY, 200.0, Unit.kcal));
-        nutrients.add(new Nutrient(NutrientType.FAT, 20.0, Unit.g));
-        nutrients.add(new Nutrient(NutrientType.SUGARS, 40.0, Unit.g));
+        nutrients.add(new Nutrient(NutrientType.ENERGY, 200.0));
+        nutrients.add(new Nutrient(NutrientType.FAT, 20.0));
+        nutrients.add(new Nutrient(NutrientType.SUGARS, 40.0));
         Product product = new Product(123456, "Oreo Cookies", nutrients);
         updateProductData(product);
 

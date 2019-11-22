@@ -11,12 +11,18 @@ import com.nutriscan.misc.enums.Unit;
 public class Nutrient {
     private final NutrientType nutrientType;
     private final double amount;
-    private final Unit unit;
 
+    public Nutrient(@NonNull NutrientType nutrientType, double amount) {
+        this.nutrientType = nutrientType;
+        this.amount = amount;
+    }
+
+    /**
+     * @deprecated - use Nutrient(NutrientType, double)
+     */
     public Nutrient(@NonNull NutrientType nutrientType, double amount, Unit unit) {
         this.nutrientType = nutrientType;
         this.amount = amount;
-        this.unit = unit;
     }
 
     public NutrientType getNutrientType() {
@@ -28,7 +34,7 @@ public class Nutrient {
     }
 
     public Unit getUnit() {
-        return unit;
+        return nutrientType.getUnit();
     }
 
     @NonNull

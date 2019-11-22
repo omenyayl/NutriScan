@@ -33,10 +33,10 @@ public class FoodRepository {
 
     private void mockScannedItem() {
         List<Nutrient> nutrients = new ArrayList<>();
-        nutrients.add(new Nutrient(NutrientType.ENERGY, 400, Unit.kcal));
-        nutrients.add(new Nutrient(NutrientType.PROTEIN, 20, Unit.g));
-        nutrients.add(new Nutrient(NutrientType.FAT, 500, Unit.g));
-        nutrients.add(new Nutrient(NutrientType.POTASSIUM, 60, Unit.mg));
+        nutrients.add(new Nutrient(NutrientType.ENERGY, 400));
+        nutrients.add(new Nutrient(NutrientType.PROTEIN, 20));
+        nutrients.add(new Nutrient(NutrientType.FAT, 500));
+        nutrients.add(new Nutrient(NutrientType.POTASSIUM, 60));
         Product p = new Product(1234567,"BROCOOLINIECHEDAR", nutrients);
         this.scannedItem.postValue(p);
     }
