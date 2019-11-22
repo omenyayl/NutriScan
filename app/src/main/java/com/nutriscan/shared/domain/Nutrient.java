@@ -3,6 +3,7 @@ package com.nutriscan.shared.domain;
 import androidx.annotation.NonNull;
 
 import com.nutriscan.misc.enums.NutrientType;
+import com.nutriscan.misc.enums.Unit;
 
 /**
  * An immutable nutrient domain object
@@ -10,9 +11,9 @@ import com.nutriscan.misc.enums.NutrientType;
 public class Nutrient {
     private final NutrientType nutrientType;
     private final double amount;
-    private final String unit;
+    private final Unit unit;
 
-    public Nutrient(@NonNull NutrientType nutrientType, double amount, String unit) {
+    public Nutrient(@NonNull NutrientType nutrientType, double amount, Unit unit) {
         this.nutrientType = nutrientType;
         this.amount = amount;
         this.unit = unit;
@@ -26,7 +27,7 @@ public class Nutrient {
         return amount;
     }
 
-    public String getUnit() {
+    public Unit getUnit() {
         return unit;
     }
 
