@@ -87,12 +87,14 @@ public class ProfileAPI {
                 double nutrientAmount = nutrient.getDouble("amount");
                 String nutrientUnit = nutrient.getString("unit");
                 NutrientType nutrientType;
+                Unit unit;
                 try {
                     nutrientType = NutrientType.fromString(nutrientName);
+                    unit = Unit.fromString(nutrientUnit);
                 } catch (IllegalArgumentException e) {
                     throw new JSONException(e.toString());
                 }
-                nutrientList.add(new Nutrient(nutrientType, nutrientAmount, Unit.fromString(nutrientUnit)));
+                nutrientList.add(new Nutrient(nutrientType, nutrientAmount, unit));
             }
             scanLog.addItem(new Product(upc, name, nutrientList));
         }
