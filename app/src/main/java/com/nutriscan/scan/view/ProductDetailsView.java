@@ -1,4 +1,4 @@
-package com.nutriscan.scan;
+package com.nutriscan.scan.view;
 
 import android.Manifest;
 import android.content.Intent;
@@ -15,17 +15,13 @@ import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.nutriscan.R;
 import com.nutriscan.analysis.AnalysisView;
 import com.nutriscan.shared.repositories.FoodRepository;
-import com.nutriscan.misc.enums.NutrientType;
-import com.nutriscan.misc.enums.Unit;
 import com.nutriscan.scan.listAdapters.NutrientListAdapter;
 import com.nutriscan.shared.domain.Nutrient;
 import com.nutriscan.shared.domain.Product;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
@@ -48,12 +44,9 @@ public class ProductDetailsView extends AppCompatActivity {
         setContentView(R.layout.activity_product_details);
         bindViews();
 
-        List<Nutrient> nutrients = new ArrayList<>();
-        nutrients.add(new Nutrient(NutrientType.ENERGY, 200.0));
-        nutrients.add(new Nutrient(NutrientType.FAT, 20.0));
-        nutrients.add(new Nutrient(NutrientType.SUGARS, 40.0));
-        Product product = new Product(123456, "Oreo Cookies", nutrients);
-        updateProductData(product);
+        FoodRepository.getInstance().getScannedItem().observe(this, p -> {
+            if (p != null) updateProductData(p);
+        });
 
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 //        launchScanner();

@@ -20,7 +20,7 @@ import android.widget.Toast;
 
 import com.nutriscan.R;
 import com.nutriscan.profile.listAdapters.ScanHistoryAdapter;
-import com.nutriscan.scan.ProductDetailsView;
+import com.nutriscan.scan.view.ProductDetailsView;
 import com.nutriscan.shared.domain.Nutrient;
 import com.nutriscan.shared.domain.Person;
 import com.nutriscan.shared.domain.Product;
