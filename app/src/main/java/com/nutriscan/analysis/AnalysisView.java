@@ -31,6 +31,9 @@ public class AnalysisView extends AppCompatActivity {
         setContentView(R.layout.activity_analysis);
         bindViews();
 
+        /*
+        TODO: REMOVE COMMUNICATION FROM VIEW DIRECTLY TO REPOSITORY (AS THIS IS NOT LAYERED)
+         */
         FoodRepository.getInstance().getScannedItem().observe(this, p -> {
             if (p != null) {
                 IAnalysisEvaluator analysisEvaluator = new AnalysisEvaluator(p);
@@ -46,6 +49,10 @@ public class AnalysisView extends AppCompatActivity {
         this.textViewProductName = findViewById(R.id.textViewProductName);
         this.textViewAnalysis = findViewById(R.id.textViewAnalysis);
         this.recyclerViewHealthFactors = findViewById(R.id.recyclerViewHealthFactors);
+        findViewById(R.id.buttonAddToScanHistory).setOnClickListener(v -> onClickButtonAddToScanHistory());
+    }
+
+    private void onClickButtonAddToScanHistory() {
 
     }
 
@@ -54,6 +61,5 @@ public class AnalysisView extends AppCompatActivity {
         this.recyclerViewHealthFactors.setLayoutManager(new LinearLayoutManager(this));
         this.recyclerViewHealthFactors.setAdapter(healthFactorsAdapter);
         this.recyclerViewHealthFactors.setNestedScrollingEnabled(false);
-
     }
 }
