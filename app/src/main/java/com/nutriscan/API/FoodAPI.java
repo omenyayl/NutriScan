@@ -31,6 +31,11 @@ public class FoodAPI {
         return instance;
     }
 
+    /**
+     * @param productMutableLiveData Product observable of which to post the result to
+     * @param context Android Context
+     * @param upc The UPC code of the product
+     */
     public void enqueueGetProductRequest(MutableLiveData<Product> productMutableLiveData,
                                          Context context,
                                          long upc) {
@@ -50,8 +55,12 @@ public class FoodAPI {
                 },
                 error -> {
                     if (error != null) {
-                        Log.e(getClass().getName(), error.toString());
-                        Toast.makeText(context, "Error obtaining product data.", Toast.LENGTH_LONG).show();
+                        if (error.networkResponse.statusCode == 404) {
+                            Toast.makeText(context, "Could not find the product information.", Toast.LENGTH_LONG).show();
+                        } else {
+                            Log.e(getClass().getName(), error.toString());
+                            Toast.makeText(context, "Error obtaining product data.", Toast.LENGTH_LONG).show();
+                        }
                     }
                 }
         );

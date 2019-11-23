@@ -60,6 +60,7 @@ public class ProductDetailsView extends AppCompatActivity {
         });
 
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+//        productDetailsViewModel.onItemScanned(5434345222L, this);
         launchScanner();
     }
 
