@@ -46,19 +46,21 @@ public class ProductDetailsView extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_product_details);
-        bindViews();
+        setContentView(R.layout.layout_loading);
 
         productDetailsViewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication())
                 .create(ProductDetailsViewModel.class);
 
         productDetailsViewModel.getScannedProduct().observe(this, p -> {
-            if (p != null) updateProductData(p);
+            if (p != null) {
+                setContentView(R.layout.activity_product_details);
+                bindViews();
+                updateProductData(p);
+            }
         });
 
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
-        productDetailsViewModel.onItemScanned(72527273070L, this);
-//        launchScanner();
+        launchScanner();
     }
 
     private void bindViews(){
