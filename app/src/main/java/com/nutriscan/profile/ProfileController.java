@@ -9,6 +9,8 @@ import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+
+import androidx.core.app.NavUtils;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.telephony.TelephonyManager;
@@ -27,6 +29,8 @@ import com.nutriscan.shared.domain.Product;
 import com.nutriscan.shared.domain.ScanLog.IScanLog;
 import com.nutriscan.shared.repositories.PersonRepository;
 import com.nutriscan.shared.repositories.ScanHistoryRepository;
+
+import java.util.Locale;
 
 public class ProfileController extends AppCompatActivity {
 
@@ -86,12 +90,42 @@ public class ProfileController extends AppCompatActivity {
             for (Product product : scanLog.getItems()) {
                 for (Nutrient nutrient : product.getNutrients()) {
                     // TODO: traverse nutrients to update profile nutrient data
-
+                    switch (nutrient.getNutrientType()){
+                        case ENERGY:
+                            appendNutrientAmountToTextView(nutrient,textViewCaloriesValue);
+                            break;
+                        case MONOUNSATURATED:
+                        case POLYUNSATURATED:
+                        case SATURATED:
+                        case FAT:
+                        case TRANS:
+                            appendNutrientAmountToTextView(nutrient,textViewTotalFatValue);
+                            break;
+                        case CHOLESTEROL:
+                            appendNutrientAmountToTextView(nutrient,textViewCholesterolValue);
+                            break;
+                        case SODIUM:
+                            appendNutrientAmountToTextView(nutrient,textViewSodiumValue);
+                            break;
+                        case CARBS:
+                        case SUGARS:
+                            appendNutrientAmountToTextView(nutrient,textViewCarbohydrateValue);
+                            break;
+                        case PROTEIN:
+                            appendNutrientAmountToTextView(nutrient,textViewProteinValue);
+                            break;
+                    }
                     // For debugging purposes bottom logs the nutrient data (shown in Logcat).
                     Log.d(this.getClass().getName(), nutrient.toString() + ": " + nutrient.getAmount() + ' ' + nutrient.getUnit());
                 }
             }
         }
+    }
+
+    private void appendNutrientAmountToTextView(Nutrient nutrient,TextView textView){
+        double currentAmount= Double.parseDouble(textView.getText().toString());
+        double totalAmount=currentAmount+nutrient.getAmount();
+        textView.setText(String.format(Locale.US, "%.1f",totalAmount));
     }
 
     private void initScanHistory(IScanLog<Product> scanLog) {

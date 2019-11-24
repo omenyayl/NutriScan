@@ -15,7 +15,6 @@ import com.nutriscan.analysis.businessLayer.IAnalysisEvaluator;
 import com.nutriscan.analysis.listAdapters.HealthFactorsAdapter;
 import com.nutriscan.shared.domain.Analysis;
 import com.nutriscan.shared.domain.HealthFactor;
-import com.nutriscan.shared.repositories.FoodRepository;
 
 import java.util.List;
 import java.util.Locale;
@@ -31,18 +30,11 @@ public class AnalysisView extends AppCompatActivity {
         setContentView(R.layout.activity_analysis);
         bindViews();
 
-        /*
-        TODO: REMOVE COMMUNICATION FROM VIEW DIRECTLY TO REPOSITORY (AS THIS IS NOT LAYERED)
-         */
-        FoodRepository.getInstance().getScannedItem().observe(this, p -> {
-            if (p != null) {
-                IAnalysisEvaluator analysisEvaluator = new AnalysisEvaluator(p);
-                Analysis analysis = analysisEvaluator.getAnalysis();
-                initHealthFactorList(analysis.getHealthFactors());
-                textViewProductName.setText(p.getName());
-                textViewAnalysis.setText(String.format(Locale.US, "%.1f", analysis.getHealthRating()));
-            }
-        });
+        IAnalysisEvaluator analysisEvaluator = new AnalysisEvaluator();
+        Analysis analysis = analysisEvaluator.getAnalysis();
+        initHealthFactorList(analysis.getHealthFactors());
+        textViewProductName.setText(analysisEvaluator.getProduct().getName());
+        textViewAnalysis.setText(String.format(Locale.US, "%.1f", analysis.getHealthRating()));
     }
 
     private void bindViews(){

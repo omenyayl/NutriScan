@@ -9,6 +9,7 @@ import java.util.List;
 public interface IAnalysisEvaluator {
     Analysis getAnalysis();
     Product getProduct();
+    void saveProduct();
 }
 
 

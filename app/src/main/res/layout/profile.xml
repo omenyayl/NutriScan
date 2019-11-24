@@ -42,7 +42,7 @@
                 android:paddingLeft="16dp"
                 android:textColor="@color/black"
                 android:layout_height="wrap_content"
-                android:text="@string/sample_calories" />
+                android:text="0" />
 
             <TextView
                 android:id="@+id/textViewTotalFatName"
@@ -59,7 +59,7 @@
                 android:paddingLeft="16dp"
                 android:textColor="@color/black"
                 android:layout_height="wrap_content"
-                android:text="@string/sample_amount" />
+                android:text="0" />
 
             <TextView
                 android:id="@+id/textViewCholesterolName"
@@ -76,7 +76,7 @@
                 android:paddingLeft="16dp"
                 android:textColor="@color/black"
                 android:layout_height="wrap_content"
-                android:text="@string/sample_amount2" />
+                android:text="0" />
 
 
             <TextView
@@ -94,7 +94,7 @@
                 android:paddingLeft="16dp"
                 android:textColor="@color/black"
                 android:layout_height="wrap_content"
-                android:text="@string/sample_amount3" />
+                android:text="0" />
 
             <TextView
                 android:id="@+id/textViewCarbohydrateName"
@@ -111,7 +111,7 @@
                 android:paddingLeft="16dp"
                 android:textColor="@color/black"
                 android:layout_height="wrap_content"
-                android:text="@string/sample_amount3" />
+                android:text="0" />
 
             <TextView
                 android:id="@+id/textViewProteinName"
@@ -128,7 +128,7 @@
                 android:paddingLeft="16dp"
                 android:textColor="@color/black"
                 android:layout_height="wrap_content"
-                android:text="@string/sample_amount2" />
+                android:text="0" />
 
             <TextView
                 android:id="@+id/textViewScanHistoryName"
