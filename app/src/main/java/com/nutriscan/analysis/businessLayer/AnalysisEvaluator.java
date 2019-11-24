@@ -1,13 +1,14 @@
 package com.nutriscan.analysis.businessLayer;
 
-import com.google.gson.GsonBuilder;
-import com.google.gson.internal.GsonBuildConfig;
+import android.content.Context;
+
 import com.nutriscan.shared.domain.Analysis;
-import com.nutriscan.shared.domain.HealthFactor;
+import com.nutriscan.shared.domain.Person;
 import com.nutriscan.shared.domain.Product;
 import com.nutriscan.shared.repositories.FoodRepository;
+import com.nutriscan.shared.repositories.PersonRepository;
+import com.nutriscan.shared.repositories.ScanHistoryRepository;
 
-import java.util.List;
 import java.util.Objects;
 
 /**
@@ -35,7 +36,10 @@ public class AnalysisEvaluator implements IAnalysisEvaluator{
     /**
      * Save the analyzed product to the database (into the profile's scan history)
      */
-    public void saveProduct() {
-
+    public void saveProduct(Context context) {
+        Person person = PersonRepository.getInstance().getPerson().getValue();
+        if (person != null && this.product != null) {
+            ScanHistoryRepository.getInstance().saveProduct(context, person, this.product);
+        }
     }
 }

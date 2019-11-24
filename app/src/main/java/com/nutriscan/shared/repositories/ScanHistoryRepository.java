@@ -55,8 +55,13 @@ public class ScanHistoryRepository implements IScanHistoryRepository{
     }
 
     @Override
-    public void saveProduct(Context context, @NonNull Person person) {
-
+    public void saveProduct(Context context, @NonNull Person person, @NonNull Product product) {
+        ProfileAPI.saveProduct(context, person, product);
+        IScanLog<Product> scanHistory = this.scanLog.getValue();
+        if (scanHistory != null) {
+            scanHistory.addItem(product);
+            this.scanLog.postValue(scanHistory);
+        }
     }
 
 }

@@ -45,7 +45,7 @@ public class AnalysisActivity extends AppCompatActivity {
     }
 
     private void onClickButtonAddToScanHistory() {
-        this.analysisEvaluator.saveProduct();
+        this.analysisEvaluator.saveProduct(this);
     }
 
     /**
