@@ -6,7 +6,7 @@ import com.nutriscan.shared.domain.Person;
 /**
  * Repository containing the Person data
  */
-public class PersonRepository {
+public class PersonRepository implements IPersonRepository {
     private static PersonRepository instance;
 
     private MutableLiveData<Person> personMutableLiveData;

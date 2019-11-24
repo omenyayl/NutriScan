@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * Repository for food
  */
-public class FoodRepository {
+public class FoodRepository implements IFoodRepository{
     private static FoodRepository instance;
     private MutableLiveData <Product> scannedItem;
 
