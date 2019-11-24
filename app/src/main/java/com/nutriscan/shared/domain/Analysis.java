@@ -62,11 +62,6 @@ public final class Analysis {
          */
         List <HealthFactor> healthFactors = new ArrayList<>();
         List <Nutrient> nutrients = product.getNutrients();
-        //For one serving!
-        //3.065 is score for median range
-        //5 is unhealthy
-        //1 is healthy
-
         // 1 - Terrible
         // 2 - Unhealthy
         // 3 - Okay
