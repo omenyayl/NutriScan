@@ -2,8 +2,7 @@ package com.nutriscan.shared.repositories;
 
 import androidx.lifecycle.MutableLiveData;
 
-import com.nutriscan.misc.enums.NutrientType;
-import com.nutriscan.misc.enums.Unit;
+import com.nutriscan.shared.misc.enums.NutrientType;
 import com.nutriscan.shared.domain.Nutrient;
 import com.nutriscan.shared.domain.Product;
 

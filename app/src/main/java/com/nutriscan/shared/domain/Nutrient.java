@@ -2,8 +2,8 @@ package com.nutriscan.shared.domain;
 
 import androidx.annotation.NonNull;
 
-import com.nutriscan.misc.enums.NutrientType;
-import com.nutriscan.misc.enums.Unit;
+import com.nutriscan.shared.misc.enums.NutrientType;
+import com.nutriscan.shared.misc.enums.Unit;
 
 /**
  * An immutable nutrient domain object

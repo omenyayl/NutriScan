@@ -1,4 +1,4 @@
-package com.nutriscan.misc.enums;
+package com.nutriscan.shared.misc.enums;
 
 import androidx.annotation.NonNull;
 

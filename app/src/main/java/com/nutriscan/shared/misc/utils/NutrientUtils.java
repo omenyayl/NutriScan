@@ -1,9 +1,8 @@
-package com.nutriscan.misc.utils;
+package com.nutriscan.shared.misc.utils;
 
 import androidx.annotation.NonNull;
 
-import com.nutriscan.misc.enums.NutrientType;
-import com.nutriscan.misc.enums.Unit;
+import com.nutriscan.shared.misc.enums.Unit;
 import com.nutriscan.shared.domain.Nutrient;
 
 public class NutrientUtils {

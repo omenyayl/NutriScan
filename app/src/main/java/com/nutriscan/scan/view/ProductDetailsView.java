@@ -18,7 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.nutriscan.R;
-import com.nutriscan.analysis.AnalysisView;
+import com.nutriscan.analysis.presentationLayer.AnalysisActivity;
 import com.nutriscan.scan.viewModel.IProductDetailsViewModel;
 import com.nutriscan.scan.viewModel.ProductDetailsViewModel;
 import com.nutriscan.scan.listAdapters.NutrientListAdapter;
@@ -85,7 +85,7 @@ public class ProductDetailsView extends AppCompatActivity {
     }
 
     private void onAnalyzeButtonClicked() {
-        Intent analysisIntent = new Intent(this, AnalysisView.class);
+        Intent analysisIntent = new Intent(this, AnalysisActivity.class);
         startActivity(analysisIntent);
     }
 

@@ -1,4 +1,4 @@
-package com.nutriscan.misc.constants;
+package com.nutriscan.shared.misc.constants;
 
 import com.nutriscan.BuildConfig;
 

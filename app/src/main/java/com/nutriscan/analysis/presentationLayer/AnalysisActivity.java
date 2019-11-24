@@ -1,6 +1,6 @@
 
 
-package com.nutriscan.analysis;
+package com.nutriscan.analysis.presentationLayer;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -12,7 +12,7 @@ import android.widget.TextView;
 import com.nutriscan.R;
 import com.nutriscan.analysis.businessLayer.AnalysisEvaluator;
 import com.nutriscan.analysis.businessLayer.IAnalysisEvaluator;
-import com.nutriscan.analysis.listAdapters.HealthFactorsAdapter;
+import com.nutriscan.analysis.presentationLayer.listAdapters.HealthFactorsAdapter;
 import com.nutriscan.shared.domain.Analysis;
 import com.nutriscan.shared.domain.Product;
 
@@ -22,7 +22,7 @@ import java.util.Locale;
 /**
  * The view for the analysis functional area
  */
-public class AnalysisView extends AppCompatActivity {
+public class AnalysisActivity extends AppCompatActivity {
     private TextView textViewProductName;
     private TextView textViewAnalysis;
     private RecyclerView recyclerViewHealthFactors;

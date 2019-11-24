@@ -1,4 +1,4 @@
-package com.nutriscan.misc.listeners;
+package com.nutriscan.shared.misc.listeners;
 
 import androidx.annotation.NonNull;
 

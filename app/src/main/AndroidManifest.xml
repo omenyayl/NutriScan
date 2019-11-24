@@ -16,7 +16,7 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".analysis.AnalysisView"></activity>
+        <activity android:name=".analysis.presentationLayer.AnalysisActivity"></activity>
         <activity android:name=".scan.view.ScanActivity" />
         <activity android:name=".scan.view.ProductDetailsView" />
         <activity android:name=".profile.ProfileController">

@@ -5,9 +5,8 @@ import android.content.Context;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 
-import com.nutriscan.API.ProfileAPI;
-import com.nutriscan.misc.enums.NutrientType;
-import com.nutriscan.misc.enums.Unit;
+import com.nutriscan.shared.API.ProfileAPI;
+import com.nutriscan.shared.misc.enums.NutrientType;
 import com.nutriscan.shared.domain.Nutrient;
 import com.nutriscan.shared.domain.Person;
 import com.nutriscan.shared.domain.Product;

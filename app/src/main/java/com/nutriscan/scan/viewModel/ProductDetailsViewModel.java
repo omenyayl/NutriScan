@@ -5,7 +5,7 @@ import android.content.Context;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.nutriscan.API.FoodAPI;
+import com.nutriscan.shared.API.FoodAPI;
 import com.nutriscan.shared.domain.Product;
 import com.nutriscan.shared.repositories.FoodRepository;
 

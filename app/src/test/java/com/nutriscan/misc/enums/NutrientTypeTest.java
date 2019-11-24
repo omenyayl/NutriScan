@@ -1,5 +1,7 @@
 package com.nutriscan.misc.enums;
 
+import com.nutriscan.shared.misc.enums.NutrientType;
+
 import org.junit.Test;
 
 import static org.junit.Assert.*;

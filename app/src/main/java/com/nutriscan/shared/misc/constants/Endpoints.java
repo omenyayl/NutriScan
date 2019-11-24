@@ -1,8 +1,8 @@
-package com.nutriscan.API;
+package com.nutriscan.shared.misc.constants;
 
 import androidx.annotation.NonNull;
 
-import com.nutriscan.misc.constants.APIConstants;
+import com.nutriscan.shared.misc.constants.APIConstants;
 import com.nutriscan.shared.domain.Person;
 
 import java.util.Locale;

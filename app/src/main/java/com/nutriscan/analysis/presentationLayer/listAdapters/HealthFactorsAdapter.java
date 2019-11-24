@@ -1,4 +1,4 @@
-package com.nutriscan.analysis.listAdapters;
+package com.nutriscan.analysis.presentationLayer.listAdapters;
 
 import android.annotation.SuppressLint;
 import androidx.annotation.NonNull;
@@ -8,9 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import com.nutriscan.R;
-import com.nutriscan.misc.listeners.OnModelClick;
 import com.nutriscan.shared.domain.HealthFactor;
-import com.nutriscan.shared.domain.Product;
 
 import java.util.List;
 import java.util.Locale;

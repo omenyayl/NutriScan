@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import com.nutriscan.R;
-import com.nutriscan.misc.utils.NutrientUtils;
+import com.nutriscan.shared.misc.utils.NutrientUtils;
 import com.nutriscan.shared.domain.Nutrient;
 
 import java.util.List;

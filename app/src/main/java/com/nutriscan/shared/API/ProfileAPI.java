@@ -1,4 +1,4 @@
-package com.nutriscan.API;
+package com.nutriscan.shared.API;
 
 import android.content.Context;
 import android.util.Log;
@@ -9,7 +9,8 @@ import androidx.lifecycle.MutableLiveData;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
-import com.nutriscan.misc.enums.NutrientType;
+import com.nutriscan.shared.misc.constants.Endpoints;
+import com.nutriscan.shared.misc.enums.NutrientType;
 import com.nutriscan.shared.domain.Nutrient;
 import com.nutriscan.shared.domain.Person;
 import com.nutriscan.shared.domain.Product;
