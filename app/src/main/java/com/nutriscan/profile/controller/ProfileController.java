@@ -207,22 +207,6 @@ public class ProfileController extends AppCompatActivity {
         startActivity(productDetailsIntent);
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == REQUEST_CODE_SCAN &&
-                resultCode == RESULT_OK &&
-                data != null &&
-                data.hasExtra(ScanActivity.INTENT_EXTRA_BARCODE)) {
-            try {
-                long upc = Long.parseLong(data.getStringExtra(ScanActivity.INTENT_EXTRA_BARCODE));
-                launchProductDetailsView(upc);
-            } catch (NumberFormatException e) {
-                Log.e(getClass().getName(), e.toString());
-            }
-        }
-    }
-
     public void launchScanner() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
                 != PackageManager.PERMISSION_GRANTED) {

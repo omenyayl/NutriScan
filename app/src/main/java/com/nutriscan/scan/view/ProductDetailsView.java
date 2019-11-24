@@ -64,7 +64,6 @@ public class ProductDetailsView extends AppCompatActivity {
             });
         }
 
-//        launchScanner();
     }
 
     private long getUPCFromIntent() {
@@ -104,12 +103,17 @@ public class ProductDetailsView extends AppCompatActivity {
     // region <scanning>
 
 
+    @Override
+    public void onBackPressed() {
+        productDetailsViewModel.resetProduct();
+        super.onBackPressed();
+    }
 
     // endregion
     // region <menu>
     @Override
     public boolean onSupportNavigateUp() {
-        finish();
+        onBackPressed();
         return super.onSupportNavigateUp();
     }
     // endregion

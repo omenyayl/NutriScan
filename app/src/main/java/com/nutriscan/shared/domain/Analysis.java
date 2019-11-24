@@ -28,7 +28,7 @@ public final class Analysis {
             weight += factor.getWeight();
         }
 
-        return total + (1 - weight) * 5;
+        return total + (1 - weight) * 3;
     }
 
     /**

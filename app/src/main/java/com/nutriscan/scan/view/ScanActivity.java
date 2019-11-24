@@ -1,8 +1,11 @@
 package com.nutriscan.scan.view;
 
 import android.content.Intent;
+
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.google.zxing.Result;
 
@@ -40,9 +43,17 @@ public class ScanActivity extends AppCompatActivity implements ZXingScannerView.
      */
     @Override
     public void handleResult(Result rawResult) {
-        Intent finishIntent = new Intent();
-        finishIntent.putExtra(INTENT_EXTRA_BARCODE, rawResult.toString());
-        setResult(RESULT_OK, finishIntent);
-        finish();
+        long upc;
+        try {
+            upc = Long.parseLong(rawResult.toString());
+        } catch (NumberFormatException e) {
+            Toast.makeText(this, "Invalid barcode", Toast.LENGTH_SHORT).show();
+            finish();
+            return;
+        }
+        Intent productDetailsIntent = new Intent(this, ProductDetailsView.class);
+        productDetailsIntent.putExtra(ProductDetailsView.INTENT_KEY_UPC, upc);
+        startActivity(productDetailsIntent);
     }
+
 }
