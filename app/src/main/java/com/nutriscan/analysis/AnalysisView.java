@@ -31,22 +31,17 @@ public class AnalysisView extends AppCompatActivity {
         setContentView(R.layout.activity_analysis);
         bindViews();
 
-        FoodRepository.getInstance().getScannedItem().observe(this, p -> {
-            if (p != null) {
-                IAnalysisEvaluator analysisEvaluator = new AnalysisEvaluator(p);
-                Analysis analysis = analysisEvaluator.getAnalysis();
-                initHealthFactorList(analysis.getHealthFactors());
-                textViewProductName.setText(p.getName());
-                textViewAnalysis.setText(String.format(Locale.US, "%.1f", analysis.getHealthRating()));
-            }
-        });
+        IAnalysisEvaluator analysisEvaluator = new AnalysisEvaluator();
+        Analysis analysis = analysisEvaluator.getAnalysis();
+        initHealthFactorList(analysis.getHealthFactors());
+        textViewProductName.setText(analysisEvaluator.getProduct().getName());
+        textViewAnalysis.setText(String.format(Locale.US, "%.1f", analysis.getHealthRating()));
     }
 
     private void bindViews(){
         this.textViewProductName = findViewById(R.id.textViewProductName);
         this.textViewAnalysis = findViewById(R.id.textViewAnalysis);
         this.recyclerViewHealthFactors = findViewById(R.id.recyclerViewHealthFactors);
-
     }
 
     private void initHealthFactorList(List<HealthFactor> healthFactors){
@@ -54,6 +49,5 @@ public class AnalysisView extends AppCompatActivity {
         this.recyclerViewHealthFactors.setLayoutManager(new LinearLayoutManager(this));
         this.recyclerViewHealthFactors.setAdapter(healthFactorsAdapter);
         this.recyclerViewHealthFactors.setNestedScrollingEnabled(false);
-
     }
 }
