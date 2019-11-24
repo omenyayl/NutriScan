@@ -22,15 +22,17 @@ public final class Analysis {
 
     private double calculateHealthRatingFromHealthFactors(@NonNull List<HealthFactor> healthFactors) {
         double total = 0;
+        double weight = 0;
         for (HealthFactor factor : healthFactors) {
             total += factor.getWeight() * factor.getMagnitude();
+            weight += factor.getWeight();
         }
 
-        if (total>3.361){
-            total = 3.361;
-        }
-
-        total=(total/3.361)*5;
+//        if (total>3.361){
+//            total = 3.361;
+//        }
+//
+//        total=(total/3.361)*5;
 
 //        int ret_total= (int)(total);
 //
@@ -47,7 +49,7 @@ public final class Analysis {
 //            total = 1;
 //        }
 
-        return total;
+        return total + (1 - weight) * 5;
     }
 
     /**
@@ -65,6 +67,12 @@ public final class Analysis {
         //5 is unhealthy
         //1 is healthy
 
+        // 1 - Terrible
+        // 2 - Unhealthy
+        // 3 - Okay
+        // 4 - Good
+        // 5 - Great
+
         for(Nutrient nutrient:nutrients){
             double amount = 0;
             double dailyvalue= 0;
@@ -74,33 +82,33 @@ public final class Analysis {
                     dailyvalue = nutrient.getNutrientType().getDailyValue();
                     if(amount>dailyvalue*.2){ //greater than 20%
 
-                        healthFactors.add(new HealthFactor("Fat amount", .0935, 4));
+                        healthFactors.add(new HealthFactor("Fat amount", .0935, 2));
                     }
                     else if(amount<=dailyvalue*.05){  //dv less than 5%
-                        healthFactors.add(new HealthFactor("Protein", .0935, 3));
+                        healthFactors.add(new HealthFactor("Protein", .0935, 2));
                     }
                     else {
-                        healthFactors.add(new HealthFactor("Fat amount", .0935, 2));
+                        healthFactors.add(new HealthFactor("Fat amount", .0935, 4));
                     }
                     break;
                 case PROTEIN:
                     amount = nutrient.getAmount();
                     dailyvalue = nutrient.getNutrientType().getDailyValue();
                     if(amount>dailyvalue*.2){ //greater than 20%
-                        healthFactors.add(new HealthFactor("Protein", .0935, 4));
+                        healthFactors.add(new HealthFactor("Protein", .0935, 3));
                     }
                     else if(amount<=dailyvalue*.05){  //dv less than 5%
-                        healthFactors.add(new HealthFactor("Protein", .0935, 3));
+                        healthFactors.add(new HealthFactor("Protein", .0935, 2));
                     }
                     else{
-                        healthFactors.add(new HealthFactor("Protein", .0935, 3));
+                        healthFactors.add(new HealthFactor("Protein", .0935, 4));
                     }
                     break;
                 case ENERGY:
                     amount = nutrient.getAmount();
                     dailyvalue = nutrient.getNutrientType().getDailyValue();
                     if(amount>dailyvalue*.2){ //greater than 20%                  //dailyvalue || amount/dailyvalue > dailyvalue/2){
-                        healthFactors.add(new HealthFactor("Energy", .213, 5));
+                        healthFactors.add(new HealthFactor("Energy", .213, 1));
                     }
                     else if(amount<=dailyvalue*.05){  //dv less than 5%
                         healthFactors.add(new HealthFactor("Energy", .213, 3));
@@ -113,51 +121,51 @@ public final class Analysis {
                     amount = nutrient.getAmount();
                     dailyvalue = nutrient.getNutrientType().getDailyValue();
                     if(amount>dailyvalue*.2){ //greater than 20%                  //dailyvalue || amount/dailyvalue > dailyvalue/2){
-                        healthFactors.add(new HealthFactor("Sugars", .213, 5));
+                        healthFactors.add(new HealthFactor("Sugars", .213, 1));
                     }
                     else if(amount<=dailyvalue*.05){
-                        healthFactors.add(new HealthFactor("Sugars", .213, 2));
+                        healthFactors.add(new HealthFactor("Sugars", .213, 4));
                     }
                     else {
-                        healthFactors.add(new HealthFactor("Sugars", .213, 5));
+                        healthFactors.add(new HealthFactor("Sugars", .213, 3));
                     }
                     break;
                 case CHOLESTEROL:
                     amount = nutrient.getAmount();
                     dailyvalue = nutrient.getNutrientType().getDailyValue();
                     if(amount>dailyvalue*.2){ //greater than 20%
-                        healthFactors.add(new HealthFactor("Cholesterol", .2, 4));
+                        healthFactors.add(new HealthFactor("Cholesterol", .2, 1));
                     }
                     else if(amount<=dailyvalue*.05){
-                        healthFactors.add(new HealthFactor("Cholesterol", .2, 3));
+                        healthFactors.add(new HealthFactor("Cholesterol", .2, 5));
                     }
                     else {
-                        healthFactors.add(new HealthFactor("Cholesterol", .2,2));
+                        healthFactors.add(new HealthFactor("Cholesterol", .2,3));
                     }
                     break;
                 case SODIUM:
                     amount = nutrient.getAmount();
                     dailyvalue = nutrient.getNutrientType().getDailyValue();
                     if(amount>dailyvalue*.2){ //greater than 20%
-                        healthFactors.add(new HealthFactor("Sodium", .0935, 4));
+                        healthFactors.add(new HealthFactor("Sodium", .0935, 2));
                     }
                     else if(amount<=dailyvalue*.05){
-                        healthFactors.add(new HealthFactor("Sodium", .0935, 1));
+                        healthFactors.add(new HealthFactor("Sodium", .0935, 5));
                     }
                     else {
-                        healthFactors.add(new HealthFactor("Sodium", .0935, 2));
+                        healthFactors.add(new HealthFactor("Sodium", .0935, 3));
                     }
                     break;
                 case FIBER:
                     if(amount>dailyvalue*.2){ //greater than 20%
-                        healthFactors.add(new HealthFactor("Fiber", .0935,4));
+                        healthFactors.add(new HealthFactor("Fiber", .0935,2));
 
                     }
                     else if(amount<=dailyvalue*.05){
-                        healthFactors.add(new HealthFactor("Fiber", .0935, 1));
+                        healthFactors.add(new HealthFactor("Fiber", .0935, 2));
                     }
                     else {
-                        healthFactors.add(new HealthFactor("Fiber", .0935,2));
+                        healthFactors.add(new HealthFactor("Fiber", .0935,4));
                     }
                     break;
 
