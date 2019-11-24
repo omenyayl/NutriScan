@@ -46,7 +46,7 @@ public class FoodAPI {
                 },
                 error -> {
                     if (error != null) {
-                        if (error.networkResponse.statusCode == 404) {
+                        if (error.networkResponse != null && error.networkResponse.statusCode == 404) {
                             Toast.makeText(context, "Could not find the product information.", Toast.LENGTH_LONG).show();
                         } else {
                             Log.e("FoodAPI", error.toString());

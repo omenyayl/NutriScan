@@ -5,4 +5,12 @@
     <color name="colorAccent">#E632A1</color>
     <color name="lightBlack">#3E3D3D</color>
     <color name="black">#000000</color>
+
+
+    <color name="analysis_1">#C01F1F</color>
+    <color name="analysis_2">#BF360C</color>
+    <color name="analysis_3">#FAA000</color>
+    <color name="analysis_4">#827717</color>
+    <color name="analysis_5">#1B5E20</color>
+
 </resources>

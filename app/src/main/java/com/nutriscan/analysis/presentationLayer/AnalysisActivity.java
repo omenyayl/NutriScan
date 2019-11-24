@@ -3,6 +3,7 @@
 package com.nutriscan.analysis.presentationLayer;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -61,5 +62,26 @@ public class AnalysisActivity extends AppCompatActivity {
 
         this.textViewProductName.setText(product.getName());
         this.textViewAnalysis.setText(String.format(Locale.US, "%.1f", analysis.getHealthRating()));
+        colorHealthRatingTextView(analysis.getHealthRating());
+    }
+
+    private void colorHealthRatingTextView(double healthRating) {
+        int color = 0;
+        switch ((int) healthRating) {
+            case 1:
+                color = ContextCompat.getColor(this, R.color.analysis_1);
+                break;
+            case 2:
+                color = ContextCompat.getColor(this, R.color.analysis_2);
+                break;
+            case 3:
+                color = ContextCompat.getColor(this, R.color.analysis_4);
+                break;
+            case 4:
+            case 5:
+                color = ContextCompat.getColor(this, R.color.analysis_5);
+                break;
+        }
+        this.textViewAnalysis.setTextColor(color);
     }
 }

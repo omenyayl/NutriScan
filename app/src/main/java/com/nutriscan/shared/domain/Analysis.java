@@ -28,27 +28,6 @@ public final class Analysis {
             weight += factor.getWeight();
         }
 
-//        if (total>3.361){
-//            total = 3.361;
-//        }
-//
-//        total=(total/3.361)*5;
-
-//        int ret_total= (int)(total);
-//
-//        if(total == 1){
-//            total = 5;
-//        }
-//        else if(total == 2){
-//            total = 4;
-//        }
-//        else if (total ==4){
-//            total = 2;
-//        }
-//        else if (total == 5){
-//            total = 1;
-//        }
-
         return total + (1 - weight) * 5;
     }
 

@@ -10,6 +10,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.telephony.TelephonyManager;
@@ -22,6 +23,7 @@ import android.widget.Toast;
 import com.nutriscan.R;
 import com.nutriscan.profile.view.listAdapters.ScanHistoryAdapter;
 import com.nutriscan.scan.view.ProductDetailsView;
+import com.nutriscan.scan.view.ScanActivity;
 import com.nutriscan.shared.domain.Nutrient;
 import com.nutriscan.shared.domain.Person;
 import com.nutriscan.shared.domain.Product;
@@ -41,7 +43,8 @@ public class ProfileController extends AppCompatActivity {
     private TextView textViewCarbohydrateValue;
     private TextView textViewProteinValue;
 
-
+    private static final int REQUEST_CODE_SCAN = 102;
+    private static final int REQUEST_CAMERA_PERMISSION = 103;
     private static final int PERMISSION_REQUEST_PHONE_STATE = 101;
 
     @Override
@@ -132,8 +135,7 @@ public class ProfileController extends AppCompatActivity {
         recyclerViewScanHistory.setLayoutManager(layoutManager);
         recyclerViewScanHistory.setAdapter(adapter);
         recyclerViewScanHistory.setNestedScrollingEnabled(false);
-        adapter.setOnModelClickListener(model ->
-                Toast.makeText(this, model.toString(), Toast.LENGTH_SHORT).show());
+        adapter.setOnModelClickListener(model -> launchProductDetailsView(model.getUpc()));
     }
 
     // endregion
@@ -148,8 +150,9 @@ public class ProfileController extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.action_scan) {
-            Intent scanIntent = new Intent(this, ProductDetailsView.class);
-            startActivity(scanIntent);
+//            Intent scanIntent = new Intent(this, ProductDetailsView.class);
+//            startActivity(scanIntent);
+            launchScanner();
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -188,6 +191,47 @@ public class ProfileController extends AppCompatActivity {
                 finish();
             }
         }
+        if (requestCode == REQUEST_CAMERA_PERMISSION) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                launchScanner();
+            } else {
+                Toast.makeText(this, "Please grant camera permission to use the scanner", Toast.LENGTH_SHORT).show();
+            }
+        }
     }
     // endregion
+
+    private void launchProductDetailsView(long upc) {
+        Intent productDetailsIntent = new Intent(this, ProductDetailsView.class);
+        productDetailsIntent.putExtra(ProductDetailsView.INTENT_KEY_UPC, upc);
+        startActivity(productDetailsIntent);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_CODE_SCAN &&
+                resultCode == RESULT_OK &&
+                data != null &&
+                data.hasExtra(ScanActivity.INTENT_EXTRA_BARCODE)) {
+            try {
+                long upc = Long.parseLong(data.getStringExtra(ScanActivity.INTENT_EXTRA_BARCODE));
+                launchProductDetailsView(upc);
+            } catch (NumberFormatException e) {
+                Log.e(getClass().getName(), e.toString());
+            }
+        }
+    }
+
+    public void launchScanner() {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
+                != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.CAMERA}, REQUEST_CAMERA_PERMISSION);
+        } else {
+            Intent intent = new Intent(this, ScanActivity.class);
+            startActivityForResult(intent, REQUEST_CODE_SCAN);
+        }
+    }
+
 }

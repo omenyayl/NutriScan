@@ -34,8 +34,7 @@ import java.util.Objects;
  */
 public class ProductDetailsView extends AppCompatActivity {
 
-    private static final int REQUEST_CODE_SCAN = 102;
-    private static final int REQUEST_CAMERA_PERMISSION = 103;
+    public static String INTENT_KEY_UPC = "upc";
 
     private IProductDetailsViewModel productDetailsViewModel;
 
@@ -52,7 +51,29 @@ public class ProductDetailsView extends AppCompatActivity {
                 .create(ProductDetailsViewModel.class);
 
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
-        launchScanner();
+
+        long upc = getUPCFromIntent();
+
+        if (upc != -1) {
+            productDetailsViewModel.getProduct(this, upc).observe(this, p -> {
+                if (p != null) {
+                    setContentView(R.layout.activity_product_details);
+                    bindViews();
+                    updateProductData(p);
+                }
+            });
+        }
+
+//        launchScanner();
+    }
+
+    private long getUPCFromIntent() {
+        Intent intent = getIntent();
+
+        if (intent != null && intent.hasExtra(INTENT_KEY_UPC)) {
+            return intent.getLongExtra(INTENT_KEY_UPC, -1);
+        }
+        return -1;
     }
 
     private void bindViews(){
@@ -82,56 +103,7 @@ public class ProductDetailsView extends AppCompatActivity {
 
     // region <scanning>
 
-    private void onItemScanned(long upc) {
-        productDetailsViewModel.getProduct(this, upc).observe(this, p -> {
-            if (p != null) {
-                setContentView(R.layout.activity_product_details);
-                bindViews();
-                updateProductData(p);
-            }
-        });
-    }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == REQUEST_CODE_SCAN &&
-                resultCode == RESULT_OK &&
-                data != null &&
-                data.hasExtra(ScanActivity.INTENT_EXTRA_BARCODE)) {
-            try {
-                long upc = Long.parseLong(data.getStringExtra(ScanActivity.INTENT_EXTRA_BARCODE));
-                onItemScanned(upc);
-            } catch (NumberFormatException e) {
-                Log.e(getClass().getName(), e.toString());
-            }
-        } else if (requestCode == REQUEST_CODE_SCAN && resultCode != RESULT_OK) {
-            finish();
-        }
-    }
-
-    public void launchScanner() {
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
-                != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this,
-                    new String[]{Manifest.permission.CAMERA}, REQUEST_CAMERA_PERMISSION);
-        } else {
-            Intent intent = new Intent(this, ScanActivity.class);
-            startActivityForResult(intent, REQUEST_CODE_SCAN);
-        }
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        if (requestCode == REQUEST_CAMERA_PERMISSION) {
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                launchScanner();
-            } else {
-                Toast.makeText(this, "Please grant camera permission to use the scanner", Toast.LENGTH_SHORT).show();
-                finish();
-            }
-        }
-    }
 
     // endregion
     // region <menu>
