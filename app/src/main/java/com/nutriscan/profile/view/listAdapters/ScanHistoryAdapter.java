@@ -1,4 +1,4 @@
-package com.nutriscan.profile.listAdapters;
+package com.nutriscan.profile.view.listAdapters;
 
 import android.annotation.SuppressLint;
 import androidx.annotation.NonNull;

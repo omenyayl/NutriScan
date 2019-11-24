@@ -21,7 +21,7 @@ import com.nutriscan.R;
 import com.nutriscan.analysis.presentationLayer.AnalysisActivity;
 import com.nutriscan.scan.viewModel.IProductDetailsViewModel;
 import com.nutriscan.scan.viewModel.ProductDetailsViewModel;
-import com.nutriscan.scan.listAdapters.NutrientListAdapter;
+import com.nutriscan.scan.view.listAdapters.NutrientListAdapter;
 import com.nutriscan.shared.domain.Nutrient;
 import com.nutriscan.shared.domain.Product;
 

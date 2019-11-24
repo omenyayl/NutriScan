@@ -1,4 +1,4 @@
-package com.nutriscan.scan.listAdapters;
+package com.nutriscan.scan.view.listAdapters;
 
 import android.annotation.SuppressLint;
 import androidx.annotation.NonNull;

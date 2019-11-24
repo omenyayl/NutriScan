@@ -1,4 +1,4 @@
-package com.nutriscan.profile;
+package com.nutriscan.profile.controller;
 
 import android.Manifest;
 import android.content.Context;
@@ -10,7 +10,6 @@ import androidx.core.app.ActivityCompat;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
-import androidx.core.app.NavUtils;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.telephony.TelephonyManager;
@@ -21,7 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.nutriscan.R;
-import com.nutriscan.profile.listAdapters.ScanHistoryAdapter;
+import com.nutriscan.profile.view.listAdapters.ScanHistoryAdapter;
 import com.nutriscan.scan.view.ProductDetailsView;
 import com.nutriscan.shared.domain.Nutrient;
 import com.nutriscan.shared.domain.Person;
@@ -89,7 +88,6 @@ public class ProfileController extends AppCompatActivity {
             initScanHistory(scanLog);
             for (Product product : scanLog.getItems()) {
                 for (Nutrient nutrient : product.getNutrients()) {
-                    // TODO: traverse nutrients to update profile nutrient data
                     switch (nutrient.getNutrientType()){
                         case ENERGY:
                             appendNutrientAmountToTextView(nutrient,textViewCaloriesValue);
