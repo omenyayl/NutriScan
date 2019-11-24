@@ -1,7 +1,10 @@
 package com.nutriscan.shared.repositories;
 
+import android.content.Context;
+
 import androidx.lifecycle.MutableLiveData;
 
+import com.nutriscan.shared.API.FoodAPI;
 import com.nutriscan.shared.misc.enums.NutrientType;
 import com.nutriscan.shared.domain.Nutrient;
 import com.nutriscan.shared.domain.Product;
@@ -12,7 +15,7 @@ import java.util.List;
 /**
  * Repository for food
  */
-public class FoodRepository {
+public class FoodRepository implements IFoodRepository{
     private static FoodRepository instance;
     private MutableLiveData <Product> scannedItem;
 
@@ -27,6 +30,15 @@ public class FoodRepository {
 
     public MutableLiveData<Product> getScannedItem() {
 //        mockScannedItem();
+        return scannedItem;
+    }
+
+    public MutableLiveData<Product> getProduct(Context context, long upc) {
+        FoodAPI.enqueueGetProductRequest(
+                this.scannedItem,
+                context,
+                upc
+        );
         return scannedItem;
     }
 

@@ -21,7 +21,7 @@ import com.nutriscan.R;
 import com.nutriscan.analysis.presentationLayer.AnalysisActivity;
 import com.nutriscan.scan.viewModel.IProductDetailsViewModel;
 import com.nutriscan.scan.viewModel.ProductDetailsViewModel;
-import com.nutriscan.scan.listAdapters.NutrientListAdapter;
+import com.nutriscan.scan.view.listAdapters.NutrientListAdapter;
 import com.nutriscan.shared.domain.Nutrient;
 import com.nutriscan.shared.domain.Product;
 
@@ -51,16 +51,7 @@ public class ProductDetailsView extends AppCompatActivity {
         productDetailsViewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication())
                 .create(ProductDetailsViewModel.class);
 
-        productDetailsViewModel.getScannedProduct().observe(this, p -> {
-            if (p != null) {
-                setContentView(R.layout.activity_product_details);
-                bindViews();
-                updateProductData(p);
-            }
-        });
-
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
-//        productDetailsViewModel.onItemScanned(5434345222L, this);
         launchScanner();
     }
 
@@ -90,6 +81,17 @@ public class ProductDetailsView extends AppCompatActivity {
     }
 
     // region <scanning>
+
+    private void onItemScanned(long upc) {
+        productDetailsViewModel.getProduct(this, upc).observe(this, p -> {
+            if (p != null) {
+                setContentView(R.layout.activity_product_details);
+                bindViews();
+                updateProductData(p);
+            }
+        });
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -99,7 +101,7 @@ public class ProductDetailsView extends AppCompatActivity {
                 data.hasExtra(ScanActivity.INTENT_EXTRA_BARCODE)) {
             try {
                 long upc = Long.parseLong(data.getStringExtra(ScanActivity.INTENT_EXTRA_BARCODE));
-                productDetailsViewModel.onItemScanned(upc, this);
+                onItemScanned(upc);
             } catch (NumberFormatException e) {
                 Log.e(getClass().getName(), e.toString());
             }

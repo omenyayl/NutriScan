@@ -19,7 +19,7 @@
         <activity android:name=".analysis.presentationLayer.AnalysisActivity"></activity>
         <activity android:name=".scan.view.ScanActivity" />
         <activity android:name=".scan.view.ProductDetailsView" />
-        <activity android:name=".profile.ProfileController">
+        <activity android:name=".profile.controller.ProfileController">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

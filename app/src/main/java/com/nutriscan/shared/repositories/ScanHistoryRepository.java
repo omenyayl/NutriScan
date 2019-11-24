@@ -20,7 +20,7 @@ import java.util.List;
 /**
  * Repository containing the scan history data
  */
-public class ScanHistoryRepository {
+public class ScanHistoryRepository implements IScanHistoryRepository{
     private static ScanHistoryRepository instance;
     private MutableLiveData<IScanLog<Product>> scanLog;
 
@@ -52,6 +52,16 @@ public class ScanHistoryRepository {
         ProfileAPI.getInstance().enqueueGetProductsRequest(this.scanLog, context, person);
 //        mockRequestProducts();
         return scanLog;
+    }
+
+    @Override
+    public void saveProduct(Context context, @NonNull Person person, @NonNull Product product) {
+        ProfileAPI.saveProduct(context, person, product);
+        IScanLog<Product> scanHistory = this.scanLog.getValue();
+        if (scanHistory != null) {
+            scanHistory.addItem(product);
+            this.scanLog.postValue(scanHistory);
+        }
     }
 
 }

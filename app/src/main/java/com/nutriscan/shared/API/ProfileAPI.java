@@ -16,6 +16,7 @@ import com.nutriscan.shared.domain.Person;
 import com.nutriscan.shared.domain.Product;
 import com.nutriscan.shared.domain.ScanLog.IScanLog;
 import com.nutriscan.shared.domain.ScanLog.ScanLog;
+import com.nutriscan.shared.misc.volley.PostStringRequest;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -65,6 +66,46 @@ public class ProfileAPI {
                 }
         );
         requestQueue.add(jsonArrayRequest);
+    }
+
+    public static void saveProduct(Context context, Person person, Product product) {
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+        String url = Endpoints.getProfileScanHistoryEndpoint(person);
+
+        JSONObject jsonBody = new JSONObject();
+
+        try {
+            jsonBody.put("upc", product.getUpc());
+            jsonBody.put("name", product.getName());
+            JSONArray nutrientsJSON = new JSONArray();
+            for (Nutrient nutrient : product.getNutrients()) {
+                JSONObject nutrientJSON = new JSONObject();
+                nutrientJSON.put("name", nutrient.getNutrientType().name());
+                nutrientJSON.put("amount", nutrient.getAmount());
+                nutrientJSON.put("unit", nutrient.getUnit().name());
+                nutrientsJSON.put(nutrientJSON);
+            }
+            jsonBody.put("nutrients", nutrientsJSON);
+        } catch (JSONException e) {
+            Log.e(LOG_TAG, e.toString());
+            return;
+        }
+
+        PostStringRequest postStringRequest = new PostStringRequest(
+                url,
+                str -> {
+                    Log.d(LOG_TAG, "Successfully posted");
+                    Toast.makeText(context, "Product saved!", Toast.LENGTH_SHORT).show();
+                },
+                error -> {
+                    if (error != null) {
+                        Log.e(LOG_TAG, error.toString());
+                        Toast.makeText(context, "Could not save product to your scan history", Toast.LENGTH_LONG).show();
+                    }
+                },
+                jsonBody.toString()
+        );
+        requestQueue.add(postStringRequest);
     }
 
     /**

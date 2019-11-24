@@ -22,21 +22,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FoodAPI {
-    private static FoodAPI instance;
-
-    private FoodAPI() {}
-
-    public static FoodAPI getInstance() {
-        if (instance == null) instance = new FoodAPI();
-        return instance;
-    }
-
     /**
      * @param productMutableLiveData Product observable of which to post the result to
      * @param context Android Context
      * @param upc The UPC code of the product
      */
-    public void enqueueGetProductRequest(MutableLiveData<Product> productMutableLiveData,
+    public static void enqueueGetProductRequest(MutableLiveData<Product> productMutableLiveData,
                                          Context context,
                                          long upc) {
         RequestQueue requestQueue = Volley.newRequestQueue(context);
@@ -50,7 +41,7 @@ public class FoodAPI {
                         productMutableLiveData.postValue(product);
                     } catch (JSONException | IllegalArgumentException e) {
                         Toast.makeText(context, "Unable to process product information.", Toast.LENGTH_LONG).show();
-                        Log.e(getClass().getName(), e.toString());
+                        Log.e("FoodAPI", e.toString());
                     }
                 },
                 error -> {
@@ -58,7 +49,7 @@ public class FoodAPI {
                         if (error.networkResponse.statusCode == 404) {
                             Toast.makeText(context, "Could not find the product information.", Toast.LENGTH_LONG).show();
                         } else {
-                            Log.e(getClass().getName(), error.toString());
+                            Log.e("FoodAPI", error.toString());
                             Toast.makeText(context, "Error obtaining product data.", Toast.LENGTH_LONG).show();
                         }
                     }
@@ -67,7 +58,7 @@ public class FoodAPI {
         requestQueue.add(jsonArrayRequest);
     }
 
-    private Product getProductFromJSON(JSONObject jsonObjectProduct) throws JSONException, IllegalArgumentException {
+    private static Product getProductFromJSON(JSONObject jsonObjectProduct) throws JSONException, IllegalArgumentException {
         JSONArray jsonArrayNutrients = jsonObjectProduct.getJSONArray("nutrients");
         List<Nutrient> nutrientList = new ArrayList<>();
         for (int i = 0; i < jsonArrayNutrients.length(); i++) {
