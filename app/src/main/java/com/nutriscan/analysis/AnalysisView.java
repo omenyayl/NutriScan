@@ -14,27 +14,27 @@ import com.nutriscan.analysis.businessLayer.AnalysisEvaluator;
 import com.nutriscan.analysis.businessLayer.IAnalysisEvaluator;
 import com.nutriscan.analysis.listAdapters.HealthFactorsAdapter;
 import com.nutriscan.shared.domain.Analysis;
-import com.nutriscan.shared.domain.HealthFactor;
+import com.nutriscan.shared.domain.Product;
 
-import java.util.List;
 import java.util.Locale;
 
+
+/**
+ * The view for the analysis functional area
+ */
 public class AnalysisView extends AppCompatActivity {
     private TextView textViewProductName;
     private TextView textViewAnalysis;
     private RecyclerView recyclerViewHealthFactors;
+    private IAnalysisEvaluator analysisEvaluator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_analysis);
         bindViews();
-
-        IAnalysisEvaluator analysisEvaluator = new AnalysisEvaluator();
-        Analysis analysis = analysisEvaluator.getAnalysis();
-        initHealthFactorList(analysis.getHealthFactors());
-        textViewProductName.setText(analysisEvaluator.getProduct().getName());
-        textViewAnalysis.setText(String.format(Locale.US, "%.1f", analysis.getHealthRating()));
+        this.analysisEvaluator = new AnalysisEvaluator();
+        updateAnalysisView(this.analysisEvaluator.getAnalysis(), this.analysisEvaluator.getProduct());
     }
 
     private void bindViews(){
@@ -45,13 +45,21 @@ public class AnalysisView extends AppCompatActivity {
     }
 
     private void onClickButtonAddToScanHistory() {
-
+        this.analysisEvaluator.saveProduct();
     }
 
-    private void initHealthFactorList(List<HealthFactor> healthFactors){
-        HealthFactorsAdapter healthFactorsAdapter = new HealthFactorsAdapter(healthFactors);
+    /**
+     * Sets the text and list data in this view
+     * @param analysis The analysis to use
+     * @param product The product to use
+     */
+    private void updateAnalysisView(Analysis analysis, Product product){
+        HealthFactorsAdapter healthFactorsAdapter = new HealthFactorsAdapter(analysis.getHealthFactors());
         this.recyclerViewHealthFactors.setLayoutManager(new LinearLayoutManager(this));
         this.recyclerViewHealthFactors.setAdapter(healthFactorsAdapter);
         this.recyclerViewHealthFactors.setNestedScrollingEnabled(false);
+
+        this.textViewProductName.setText(product.getName());
+        this.textViewAnalysis.setText(String.format(Locale.US, "%.1f", analysis.getHealthRating()));
     }
 }
