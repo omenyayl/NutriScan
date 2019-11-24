@@ -13,7 +13,7 @@ public class HealthFactor {
     public HealthFactor(@NonNull String name, double weight, int magnitude) {
         this.name = name;
 
-        if (weight < 0 || weight > 1) throw new IllegalArgumentException("Weight must be 0-1");
+//        if (weight < 0 || weight > 1) throw new IllegalArgumentException("Weight must be 0-1");
         this.weight = weight;
 
         if (magnitude > 5 || magnitude < 0) throw new IllegalArgumentException("Magnitude must be 0-5");
